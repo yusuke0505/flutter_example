@@ -27,8 +27,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/a',
-                builder: (_, __) =>
-                    const RootScreen(label: 'ホーム', detailsPath: '/a/details'),
+                builder: (_, __) => const HomeScreen(),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -119,6 +118,22 @@ class ScaffoldWithNavBar extends StatelessWidget {
             initialLocation: index == navigationShell.currentIndex,
           );
         },
+      ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ホーム'),
+      ),
+      body: ListView(
+        children: const [],
       ),
     );
   }
