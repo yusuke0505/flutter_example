@@ -11,9 +11,17 @@ void main() {
   runApp(NestedTabNavigationExampleApp());
 }
 
-const homeLabel = 'ホーム';
-const favoriteLabel = 'お気に入り';
-const myPageLabel = 'マイページ';
+enum TabItem {
+  home(label: 'ホーム'),
+  favorite(label: 'お気に入り'),
+  myPage(label: 'マイページ');
+
+  const TabItem({
+    required this.label,
+  });
+
+  final String label;
+}
 
 class NestedTabNavigationExampleApp extends StatelessWidget {
   NestedTabNavigationExampleApp({super.key});
@@ -39,8 +47,10 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/b',
-                builder: (_, __) => const RootScreen(
-                    label: favoriteLabel, detailsPath: '/b/details'),
+                builder: (_, __) => RootScreen(
+                  label: TabItem.favorite.label,
+                  detailsPath: '/b/details',
+                ),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -54,8 +64,10 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/c',
-                builder: (_, __) => const RootScreen(
-                    label: myPageLabel, detailsPath: '/c/details'),
+                builder: (_, __) => RootScreen(
+                  label: TabItem.myPage.label,
+                  detailsPath: '/c/details',
+                ),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -95,18 +107,18 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: homeLabel,
+            icon: const Icon(Icons.home),
+            label: TabItem.home.label,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: favoriteLabel,
+            icon: const Icon(Icons.favorite),
+            label: TabItem.favorite.label,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: myPageLabel,
+            icon: const Icon(Icons.person),
+            label: TabItem.myPage.label,
           ),
         ],
         currentIndex: navigationShell.currentIndex,
@@ -128,7 +140,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(homeLabel),
+        title: Text(TabItem.home.label),
       ),
       body: ListView(
         children: [

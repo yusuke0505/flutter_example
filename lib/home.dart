@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(homeLabel),
+        title: Text(TabItem.home.label),
       ),
       body: ListView(
         children: [
