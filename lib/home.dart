@@ -23,23 +23,33 @@ class HomeScreen extends StatelessWidget {
             ),
         ],
       ),
-      floatingActionButton: Material(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(20),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () {},
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const SizedBox(
-              width: 40,
-              height: 40,
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
+      floatingActionButton: const _Button(),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  const _Button();
+  @override
+  Widget build(BuildContext context) {
+    const size = 40.0;
+    const borderRadius = size / 2;
+    return Material(
+      color: Colors.blue,
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(borderRadius),
+        onTap: () {},
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: const SizedBox(
+            width: size,
+            height: size,
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
             ),
           ),
         ),
