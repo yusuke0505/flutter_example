@@ -23,10 +23,18 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
     initialLocation: '/a',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
-        builder: (_, state, navigationShell) => MyRootScreen(
-          state: state,
-          navigationShell: navigationShell,
-        ),
+        builder: (_, state, navigationShell) {
+          if (state.extra == null) {
+            return MyRootScreen(
+              navigationShell: navigationShell,
+            );
+          } else {
+            return MyRootScreen(
+              extra: state.extra as GoRouterStateExtra,
+              navigationShell: navigationShell,
+            );
+          }
+        },
         branches: <StatefulShellBranch>[
           StatefulShellBranch(
             navigatorKey: _sectionANavigatorKey,
@@ -121,7 +129,7 @@ class RootScreen extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(4)),
             TextButton(
               onPressed: () {
-                GoRouter.of(context).go(detailsPath, extra: '$label-XYZ');
+                GoRouter.of(context).go(detailsPath);
               },
               child: const Text('View details'),
             ),

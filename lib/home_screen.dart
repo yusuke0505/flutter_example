@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_example/my_root_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         onTap: () {
           GoRouter.of(context).go(
             '/a/details',
-            extra: 'not_show_navbar',
+            extra: const GoRouterStateExtra(showNavBar: false),
           );
         },
       ),
