@@ -33,7 +33,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (_, __) => const DetailsScreen(label: 'A'),
+                    builder: (_, __) => const DetailsScreen(),
                   ),
                 ],
               ),
@@ -50,7 +50,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (_, __) => const DetailsScreen(label: 'B'),
+                    builder: (_, __) => const DetailsScreen(),
                   ),
                 ],
               ),
@@ -67,7 +67,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (_, __) => const DetailsScreen(label: 'C'),
+                    builder: (_, __) => const DetailsScreen(),
                   ),
                 ],
               ),
@@ -162,26 +162,21 @@ class RootScreen extends StatelessWidget {
 }
 
 class DetailsScreen extends HookWidget {
-  const DetailsScreen({
-    required this.label,
-    super.key,
-  });
-
-  final String label;
+  const DetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final counter = useState(0);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details Screen - $label'),
+        title: const Text('Details Screen'),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              'Details for $label - Counter: ${counter.value}',
+              'Counter: ${counter.value}',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const Padding(padding: EdgeInsets.all(4)),
