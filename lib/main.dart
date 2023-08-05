@@ -12,8 +12,8 @@ void main() {
 }
 
 const homeLabel = 'ホーム';
-const _favoriteLabel = 'お気に入り';
-const _myPageLabel = 'マイページ';
+const favoriteLabel = 'お気に入り';
+const myPageLabel = 'マイページ';
 
 class NestedTabNavigationExampleApp extends StatelessWidget {
   NestedTabNavigationExampleApp({super.key});
@@ -40,7 +40,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
               GoRoute(
                 path: '/b',
                 builder: (_, __) => const RootScreen(
-                    label: _favoriteLabel, detailsPath: '/b/details'),
+                    label: favoriteLabel, detailsPath: '/b/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -55,7 +55,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
               GoRoute(
                 path: '/c',
                 builder: (_, __) => const RootScreen(
-                    label: _myPageLabel, detailsPath: '/c/details'),
+                    label: myPageLabel, detailsPath: '/c/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -102,11 +102,11 @@ class ScaffoldWithNavBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: _favoriteLabel,
+            label: favoriteLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: _myPageLabel,
+            label: myPageLabel,
           ),
         ],
         currentIndex: navigationShell.currentIndex,
