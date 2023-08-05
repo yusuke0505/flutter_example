@@ -19,7 +19,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
     initialLocation: '/a',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) {
+        builder: (_, __, navigationShell) {
           return ScaffoldWithNavBar(navigationShell: navigationShell);
         },
         branches: <StatefulShellBranch>[
@@ -28,13 +28,12 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/a',
-                builder: (context, state) =>
+                builder: (_, __) =>
                     const RootScreen(label: 'A', detailsPath: '/a/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (context, state) =>
-                        const DetailsScreen(label: 'A'),
+                    builder: (_, __) => const DetailsScreen(label: 'A'),
                   ),
                 ],
               ),
@@ -44,7 +43,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/b',
-                builder: (context, state) => const RootScreen(
+                builder: (_, __) => const RootScreen(
                   label: 'B',
                   detailsPath: '/b/details/1',
                   secondDetailsPath: '/b/details/2',
@@ -52,7 +51,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details/:param',
-                    builder: (context, state) => DetailsScreen(
+                    builder: (_, state) => DetailsScreen(
                       label: 'B',
                       param: state.pathParameters['param'],
                     ),
@@ -65,14 +64,14 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/c',
-                builder: (context, state) => const RootScreen(
+                builder: (_, __) => const RootScreen(
                   label: 'C',
                   detailsPath: '/c/details',
                 ),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (context, state) => DetailsScreen(
+                    builder: (_, state) => DetailsScreen(
                       label: 'C',
                       extra: state.extra,
                     ),
@@ -117,7 +116,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.tab), label: 'Section C'),
         ],
         currentIndex: navigationShell.currentIndex,
-        onTap: (int index) {
+        onTap: (index) {
           navigationShell.goBranch(
             index,
             initialLocation: index == navigationShell.currentIndex,
