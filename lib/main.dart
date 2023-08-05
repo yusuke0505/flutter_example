@@ -71,10 +71,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (_, state) => DetailsScreen(
-                      label: 'C',
-                      extra: state.extra,
-                    ),
+                    builder: (_, __) => const DetailsScreen(label: 'C'),
                   ),
                 ],
               ),
@@ -179,13 +176,11 @@ class DetailsScreen extends HookWidget {
   const DetailsScreen({
     required this.label,
     this.param,
-    this.extra,
     super.key,
   });
 
   final String label;
   final String? param;
-  final Object? extra;
 
   @override
   Widget build(BuildContext context) {
@@ -216,11 +211,6 @@ class DetailsScreen extends HookWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             const Padding(padding: EdgeInsets.all(8)),
-            if (extra != null)
-              Text(
-                'Extra: ${extra!}',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
           ],
         ),
       ),
