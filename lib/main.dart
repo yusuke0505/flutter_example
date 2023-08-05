@@ -19,9 +19,8 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
     initialLocation: '/a',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
-        builder: (_, __, navigationShell) {
-          return ScaffoldWithNavBar(navigationShell: navigationShell);
-        },
+        builder: (_, __, navigationShell) =>
+            ScaffoldWithNavBar(navigationShell: navigationShell),
         branches: <StatefulShellBranch>[
           StatefulShellBranch(
             navigatorKey: _sectionANavigatorKey,
@@ -43,14 +42,11 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/b',
-                builder: (_, __) => const RootScreen(
-                  label: 'B',
-                  detailsPath: '/b/details/1',
-                  secondDetailsPath: '/b/details/2',
-                ),
+                builder: (_, __) =>
+                    const RootScreen(label: 'B', detailsPath: '/b/details'),
                 routes: <RouteBase>[
                   GoRoute(
-                    path: 'details/:param',
+                    path: 'details',
                     builder: (_, __) => const DetailsScreen(label: 'B'),
                   ),
                 ],
@@ -125,13 +121,11 @@ class RootScreen extends StatelessWidget {
   const RootScreen({
     required this.label,
     required this.detailsPath,
-    this.secondDetailsPath,
     super.key,
   });
 
   final String label;
   final String detailsPath;
-  final String? secondDetailsPath;
 
   @override
   Widget build(BuildContext context) {
@@ -155,13 +149,6 @@ class RootScreen extends StatelessWidget {
               child: const Text('View details'),
             ),
             const Padding(padding: EdgeInsets.all(4)),
-            if (secondDetailsPath != null)
-              TextButton(
-                onPressed: () {
-                  GoRouter.of(context).go(secondDetailsPath!);
-                },
-                child: const Text('View more details'),
-              ),
           ],
         ),
       ),
