@@ -104,18 +104,11 @@ class ScaffoldWithNavBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: TabItem.home.label,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.favorite),
-            label: TabItem.favorite.label,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: TabItem.myPage.label,
-          ),
+          for (var i = 0; i < TabItem.values.length; i++)
+            BottomNavigationBarItem(
+              icon: TabItem.values[i].icon,
+              label: TabItem.values[i].label,
+            ),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (index) {
