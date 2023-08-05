@@ -21,8 +21,10 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
     initialLocation: '/a',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
-        builder: (_, __, navigationShell) =>
-            ScaffoldWithNavBar(navigationShell: navigationShell),
+        builder: (_, state, navigationShell) => ScaffoldWithNavBar(
+          state: state,
+          navigationShell: navigationShell,
+        ),
         branches: <StatefulShellBranch>[
           StatefulShellBranch(
             navigatorKey: _sectionANavigatorKey,
@@ -92,32 +94,37 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
 
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({
+    required this.state,
     required this.navigationShell,
     Key? key,
   }) : super(key: key ?? const ValueKey<String>('ScaffoldWithNavBar'));
 
+  final GoRouterState state;
   final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
+    final showNavBar = state.extra != 'not_show_navbar';
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          for (var i = 0; i < TabItem.values.length; i++)
-            BottomNavigationBarItem(
-              icon: TabItem.values[i].icon,
-              label: TabItem.values[i].label,
-            ),
-        ],
-        currentIndex: navigationShell.currentIndex,
-        onTap: (index) {
-          navigationShell.goBranch(
-            index,
-            initialLocation: index == navigationShell.currentIndex,
-          );
-        },
-      ),
+      bottomNavigationBar: showNavBar
+          ? BottomNavigationBar(
+              items: <BottomNavigationBarItem>[
+                for (var i = 0; i < TabItem.values.length; i++)
+                  BottomNavigationBarItem(
+                    icon: TabItem.values[i].icon,
+                    label: TabItem.values[i].label,
+                  ),
+              ],
+              currentIndex: navigationShell.currentIndex,
+              onTap: (index) {
+                navigationShell.goBranch(
+                  index,
+                  initialLocation: index == navigationShell.currentIndex,
+                );
+              },
+            )
+          : null,
     );
   }
 }
