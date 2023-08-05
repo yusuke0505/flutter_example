@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -236,7 +237,7 @@ class RootScreen extends StatelessWidget {
 }
 
 /// The details screen for either the A or B screen.
-class DetailsScreen extends StatefulWidget {
+class DetailsScreen extends HookWidget {
   /// Constructs a [DetailsScreen].
   const DetailsScreen({
     required this.label,
@@ -259,66 +260,88 @@ class DetailsScreen extends StatefulWidget {
   final bool withScaffold;
 
   @override
-  State<StatefulWidget> createState() => DetailsScreenState();
-}
-
-/// The state for DetailsScreen
-class DetailsScreenState extends State<DetailsScreen> {
-  int _counter = 0;
-
-  @override
   Widget build(BuildContext context) {
-    if (widget.withScaffold) {
+    final counter = useState(0);
+    if (withScaffold) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Details Screen - ${widget.label}'),
+          title: Text('Details Screen - $label'),
         ),
-        body: _build(context),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Details for $label - Counter: ${counter.value}',
+                  style: Theme.of(context).textTheme.titleLarge),
+              const Padding(padding: EdgeInsets.all(4)),
+              TextButton(
+                onPressed: () {
+                  counter.value = counter.value + 1;
+                },
+                child: const Text('Increment counter'),
+              ),
+              const Padding(padding: EdgeInsets.all(8)),
+              if (param != null)
+                Text('Parameter: ${param!}',
+                    style: Theme.of(context).textTheme.titleMedium),
+              const Padding(padding: EdgeInsets.all(8)),
+              if (extra != null)
+                Text('Extra: ${extra!}',
+                    style: Theme.of(context).textTheme.titleMedium),
+              if (!withScaffold) ...<Widget>[
+                const Padding(padding: EdgeInsets.all(16)),
+                TextButton(
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                  child: const Text('< Back',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                ),
+              ]
+            ],
+          ),
+        ),
       );
     } else {
       return Container(
         color: Theme.of(context).scaffoldBackgroundColor,
-        child: _build(context),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Details for $label - Counter: ${counter.value}',
+                  style: Theme.of(context).textTheme.titleLarge),
+              const Padding(padding: EdgeInsets.all(4)),
+              TextButton(
+                onPressed: () {
+                  counter.value = counter.value + 1;
+                },
+                child: const Text('Increment counter'),
+              ),
+              const Padding(padding: EdgeInsets.all(8)),
+              if (param != null)
+                Text('Parameter: ${param!}',
+                    style: Theme.of(context).textTheme.titleMedium),
+              const Padding(padding: EdgeInsets.all(8)),
+              if (extra != null)
+                Text('Extra: ${extra!}',
+                    style: Theme.of(context).textTheme.titleMedium),
+              if (!withScaffold) ...<Widget>[
+                const Padding(padding: EdgeInsets.all(16)),
+                TextButton(
+                  onPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                  child: const Text('< Back',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                ),
+              ]
+            ],
+          ),
+        ),
       );
     }
-  }
-
-  Widget _build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text('Details for ${widget.label} - Counter: $_counter',
-              style: Theme.of(context).textTheme.titleLarge),
-          const Padding(padding: EdgeInsets.all(4)),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _counter++;
-              });
-            },
-            child: const Text('Increment counter'),
-          ),
-          const Padding(padding: EdgeInsets.all(8)),
-          if (widget.param != null)
-            Text('Parameter: ${widget.param!}',
-                style: Theme.of(context).textTheme.titleMedium),
-          const Padding(padding: EdgeInsets.all(8)),
-          if (widget.extra != null)
-            Text('Extra: ${widget.extra!}',
-                style: Theme.of(context).textTheme.titleMedium),
-          if (!widget.withScaffold) ...<Widget>[
-            const Padding(padding: EdgeInsets.all(16)),
-            TextButton(
-              onPressed: () {
-                GoRouter.of(context).pop();
-              },
-              child: const Text('< Back',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            ),
-          ]
-        ],
-      ),
-    );
   }
 }
