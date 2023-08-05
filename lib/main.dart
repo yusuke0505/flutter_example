@@ -181,112 +181,50 @@ class DetailsScreen extends HookWidget {
     required this.label,
     this.param,
     this.extra,
-    this.withScaffold = true,
     super.key,
   });
 
   final String label;
   final String? param;
   final Object? extra;
-  final bool withScaffold;
 
   @override
   Widget build(BuildContext context) {
     final counter = useState(0);
-    if (withScaffold) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Details Screen - $label'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Details Screen - $label'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'Details for $label - Counter: ${counter.value}',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const Padding(padding: EdgeInsets.all(4)),
+            TextButton(
+              onPressed: () {
+                counter.value = counter.value + 1;
+              },
+              child: const Text('Increment counter'),
+            ),
+            const Padding(padding: EdgeInsets.all(8)),
+            if (param != null)
               Text(
-                'Details for $label - Counter: ${counter.value}',
-                style: Theme.of(context).textTheme.titleLarge,
+                'Parameter: ${param!}',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
-              const Padding(padding: EdgeInsets.all(4)),
-              TextButton(
-                onPressed: () {
-                  counter.value = counter.value + 1;
-                },
-                child: const Text('Increment counter'),
-              ),
-              const Padding(padding: EdgeInsets.all(8)),
-              if (param != null)
-                Text(
-                  'Parameter: ${param!}',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              const Padding(padding: EdgeInsets.all(8)),
-              if (extra != null)
-                Text(
-                  'Extra: ${extra!}',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              if (!withScaffold) ...<Widget>[
-                const Padding(padding: EdgeInsets.all(16)),
-                TextButton(
-                  onPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  child: const Text(
-                    '< Back',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                ),
-              ]
-            ],
-          ),
-        ),
-      );
-    } else {
-      return Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            const Padding(padding: EdgeInsets.all(8)),
+            if (extra != null)
               Text(
-                'Details for $label - Counter: ${counter.value}',
-                style: Theme.of(context).textTheme.titleLarge,
+                'Extra: ${extra!}',
+                style: Theme.of(context).textTheme.titleMedium,
               ),
-              const Padding(padding: EdgeInsets.all(4)),
-              TextButton(
-                onPressed: () {
-                  counter.value = counter.value + 1;
-                },
-                child: const Text('Increment counter'),
-              ),
-              const Padding(padding: EdgeInsets.all(8)),
-              if (param != null)
-                Text(
-                  'Parameter: ${param!}',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              const Padding(padding: EdgeInsets.all(8)),
-              if (extra != null)
-                Text(
-                  'Extra: ${extra!}',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              if (!withScaffold) ...<Widget>[
-                const Padding(padding: EdgeInsets.all(16)),
-                TextButton(
-                  onPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  child: const Text(
-                    '< Back',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                ),
-              ]
-            ],
-          ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }
