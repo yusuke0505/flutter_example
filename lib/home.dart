@@ -23,13 +23,19 @@ class HomeScreen extends StatelessWidget {
             ),
         ],
       ),
-      floatingActionButton: const _Button(),
+      floatingActionButton: _Button(
+        onTap: () {},
+      ),
     );
   }
 }
 
 class _Button extends StatelessWidget {
-  const _Button();
+  const _Button({
+    required this.onTap,
+  });
+
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     const size = 40.0;
