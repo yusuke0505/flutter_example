@@ -11,6 +11,10 @@ void main() {
   runApp(NestedTabNavigationExampleApp());
 }
 
+const _homeLabel = '';
+const _favoriteLabel = 'お気に入り';
+const _myPageLabel = 'マイページ';
+
 class NestedTabNavigationExampleApp extends StatelessWidget {
   NestedTabNavigationExampleApp({super.key});
 
@@ -35,8 +39,8 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/b',
-                builder: (_, __) =>
-                    const RootScreen(label: 'お気に入り', detailsPath: '/b/details'),
+                builder: (_, __) => const RootScreen(
+                    label: _favoriteLabel, detailsPath: '/b/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -50,8 +54,8 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/c',
-                builder: (_, __) =>
-                    const RootScreen(label: 'マイページ', detailsPath: '/c/details'),
+                builder: (_, __) => const RootScreen(
+                    label: _myPageLabel, detailsPath: '/c/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -94,15 +98,15 @@ class ScaffoldWithNavBar extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'ホーム',
+            label: _homeLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'お気に入り',
+            label: _favoriteLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'マイページ',
+            label: _myPageLabel,
           ),
         ],
         currentIndex: navigationShell.currentIndex,
@@ -124,7 +128,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ホーム'),
+        title: const Text(_homeLabel),
       ),
       body: ListView(
         children: const [],
