@@ -28,7 +28,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
               GoRoute(
                 path: '/a',
                 builder: (_, __) =>
-                    const RootScreen(label: 'A', detailsPath: '/a/details'),
+                    const RootScreen(label: 'ホーム', detailsPath: '/a/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -43,7 +43,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
               GoRoute(
                 path: '/b',
                 builder: (_, __) =>
-                    const RootScreen(label: 'B', detailsPath: '/b/details'),
+                    const RootScreen(label: 'お気に入り', detailsPath: '/b/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -57,10 +57,8 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/c',
-                builder: (_, __) => const RootScreen(
-                  label: 'C',
-                  detailsPath: '/c/details',
-                ),
+                builder: (_, __) =>
+                    const RootScreen(label: 'マイページ', detailsPath: '/c/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
@@ -140,14 +138,14 @@ class RootScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Root of section $label'),
+        title: Text(label),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              'Screen $label',
+              label,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const Padding(padding: EdgeInsets.all(4)),
