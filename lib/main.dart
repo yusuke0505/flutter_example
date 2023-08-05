@@ -131,7 +131,17 @@ class HomeScreen extends StatelessWidget {
         title: const Text(_homeLabel),
       ),
       body: ListView(
-        children: const [],
+        children: [
+          for (var i = 0; i < 3; i++)
+            const ListTile(
+              title: Text(
+                '名前',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text('本文'),
+            ),
+        ],
       ),
     );
   }
