@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/home.dart';
+import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,18 +11,6 @@ final GlobalKey<NavigatorState> _sectionANavigatorKey =
 
 void main() {
   runApp(NestedTabNavigationExampleApp());
-}
-
-enum TabItem {
-  home(label: 'ホーム'),
-  favorite(label: 'お気に入り'),
-  myPage(label: 'マイページ');
-
-  const TabItem({
-    required this.label,
-  });
-
-  final String label;
 }
 
 class NestedTabNavigationExampleApp extends StatelessWidget {
