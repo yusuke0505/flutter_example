@@ -51,10 +51,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details/:param',
-                    builder: (_, state) => DetailsScreen(
-                      label: 'B',
-                      param: state.pathParameters['param'],
-                    ),
+                    builder: (_, __) => const DetailsScreen(label: 'B'),
                   ),
                 ],
               ),
@@ -175,12 +172,10 @@ class RootScreen extends StatelessWidget {
 class DetailsScreen extends HookWidget {
   const DetailsScreen({
     required this.label,
-    this.param,
     super.key,
   });
 
   final String label;
-  final String? param;
 
   @override
   Widget build(BuildContext context) {
@@ -204,12 +199,6 @@ class DetailsScreen extends HookWidget {
               },
               child: const Text('Increment counter'),
             ),
-            const Padding(padding: EdgeInsets.all(8)),
-            if (param != null)
-              Text(
-                'Parameter: ${param!}',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
             const Padding(padding: EdgeInsets.all(8)),
           ],
         ),
