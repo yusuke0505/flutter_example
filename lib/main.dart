@@ -11,7 +11,7 @@ void main() {
   runApp(NestedTabNavigationExampleApp());
 }
 
-const _homeLabel = 'ホーム';
+const homeLabel = 'ホーム';
 const _favoriteLabel = 'お気に入り';
 const _myPageLabel = 'マイページ';
 
@@ -98,7 +98,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: _homeLabel,
+            label: homeLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
@@ -128,7 +128,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(_homeLabel),
+        title: const Text(homeLabel),
       ),
       body: ListView(
         children: [
