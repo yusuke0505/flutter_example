@@ -19,8 +19,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
     initialLocation: '/a',
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
-        builder: (BuildContext context, GoRouterState state,
-            StatefulNavigationShell navigationShell) {
+        builder: (context, state, navigationShell) {
           return ScaffoldWithNavBar(navigationShell: navigationShell);
         },
         branches: <StatefulShellBranch>[
@@ -29,12 +28,12 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/a',
-                builder: (BuildContext context, GoRouterState state) =>
+                builder: (context, state) =>
                     const RootScreen(label: 'A', detailsPath: '/a/details'),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (BuildContext context, GoRouterState state) =>
+                    builder: (context, state) =>
                         const DetailsScreen(label: 'A'),
                   ),
                 ],
@@ -45,8 +44,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/b',
-                builder: (BuildContext context, GoRouterState state) =>
-                    const RootScreen(
+                builder: (context, state) => const RootScreen(
                   label: 'B',
                   detailsPath: '/b/details/1',
                   secondDetailsPath: '/b/details/2',
@@ -54,8 +52,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details/:param',
-                    builder: (BuildContext context, GoRouterState state) =>
-                        DetailsScreen(
+                    builder: (context, state) => DetailsScreen(
                       label: 'B',
                       param: state.pathParameters['param'],
                     ),
@@ -68,16 +65,14 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: '/c',
-                builder: (BuildContext context, GoRouterState state) =>
-                    const RootScreen(
+                builder: (context, state) => const RootScreen(
                   label: 'C',
                   detailsPath: '/c/details',
                 ),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'details',
-                    builder: (BuildContext context, GoRouterState state) =>
-                        DetailsScreen(
+                    builder: (context, state) => DetailsScreen(
                       label: 'C',
                       extra: state.extra,
                     ),
@@ -122,15 +117,13 @@ class ScaffoldWithNavBar extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.tab), label: 'Section C'),
         ],
         currentIndex: navigationShell.currentIndex,
-        onTap: (int index) => _onTap(context, index),
+        onTap: (int index) {
+          navigationShell.goBranch(
+            index,
+            initialLocation: index == navigationShell.currentIndex,
+          );
+        },
       ),
-    );
-  }
-
-  void _onTap(BuildContext context, int index) {
-    navigationShell.goBranch(
-      index,
-      initialLocation: index == navigationShell.currentIndex,
     );
   }
 }
@@ -157,8 +150,10 @@ class RootScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text('Screen $label',
-                style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'Screen $label',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const Padding(padding: EdgeInsets.all(4)),
             TextButton(
               onPressed: () {
@@ -207,8 +202,10 @@ class DetailsScreen extends HookWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Details for $label - Counter: ${counter.value}',
-                  style: Theme.of(context).textTheme.titleLarge),
+              Text(
+                'Details for $label - Counter: ${counter.value}',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const Padding(padding: EdgeInsets.all(4)),
               TextButton(
                 onPressed: () {
@@ -218,21 +215,26 @@ class DetailsScreen extends HookWidget {
               ),
               const Padding(padding: EdgeInsets.all(8)),
               if (param != null)
-                Text('Parameter: ${param!}',
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Parameter: ${param!}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               const Padding(padding: EdgeInsets.all(8)),
               if (extra != null)
-                Text('Extra: ${extra!}',
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Extra: ${extra!}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               if (!withScaffold) ...<Widget>[
                 const Padding(padding: EdgeInsets.all(16)),
                 TextButton(
                   onPressed: () {
                     GoRouter.of(context).pop();
                   },
-                  child: const Text('< Back',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  child: const Text(
+                    '< Back',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
                 ),
               ]
             ],
@@ -246,8 +248,10 @@ class DetailsScreen extends HookWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Details for $label - Counter: ${counter.value}',
-                  style: Theme.of(context).textTheme.titleLarge),
+              Text(
+                'Details for $label - Counter: ${counter.value}',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               const Padding(padding: EdgeInsets.all(4)),
               TextButton(
                 onPressed: () {
@@ -257,21 +261,26 @@ class DetailsScreen extends HookWidget {
               ),
               const Padding(padding: EdgeInsets.all(8)),
               if (param != null)
-                Text('Parameter: ${param!}',
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Parameter: ${param!}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               const Padding(padding: EdgeInsets.all(8)),
               if (extra != null)
-                Text('Extra: ${extra!}',
-                    style: Theme.of(context).textTheme.titleMedium),
+                Text(
+                  'Extra: ${extra!}',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               if (!withScaffold) ...<Widget>[
                 const Padding(padding: EdgeInsets.all(16)),
                 TextButton(
                   onPressed: () {
                     GoRouter.of(context).pop();
                   },
-                  child: const Text('< Back',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  child: const Text(
+                    '< Back',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
                 ),
               ]
             ],
