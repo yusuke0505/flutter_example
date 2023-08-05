@@ -11,7 +11,7 @@ void main() {
   runApp(NestedTabNavigationExampleApp());
 }
 
-const _homeLabel = '';
+const _homeLabel = 'ホーム';
 const _favoriteLabel = 'お気に入り';
 const _myPageLabel = 'マイページ';
 
