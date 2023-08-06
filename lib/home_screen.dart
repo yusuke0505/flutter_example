@@ -10,26 +10,26 @@ class HomeScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeNotifierProvider);
-    final children = state.loading
-        ? [
-            const Center(child: CircularProgressIndicator()),
-          ]
-        : [
-            for (var i = 0; i < 3; i++)
-              const ListTile(
-                title: Text(
-                  '名前',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+    final body = state.loading
+        ? const Center(child: CircularProgressIndicator())
+        : ListView(
+            children: [
+              for (var i = 0; i < 3; i++)
+                const ListTile(
+                  title: Text(
+                    '名前',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  subtitle: Text('本文'),
                 ),
-                subtitle: Text('本文'),
-              ),
-          ];
+            ],
+          );
     return Scaffold(
       appBar: AppBar(
         title: Text(TabItem.home.label),
       ),
-      body: ListView(children: children),
+      body: body,
       floatingActionButton: _Button(
         onTap: () {
           GoRouter.of(context).go('$homePath/$writePath');
