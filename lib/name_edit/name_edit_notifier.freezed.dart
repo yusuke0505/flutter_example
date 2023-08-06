@@ -103,7 +103,7 @@ class __$$_NameEditStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NameEditState implements _NameEditState {
-  const _$_NameEditState({this.loading = true, this.name = '名前未設定'});
+  const _$_NameEditState({this.loading = true, this.name = defaultName});
 
   @override
   @JsonKey()
