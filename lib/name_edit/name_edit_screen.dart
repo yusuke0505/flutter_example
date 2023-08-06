@@ -16,7 +16,12 @@ class NameEditScreen extends HookConsumerWidget {
     }, const []);
     final body = state.loading
         ? const Center(child: CircularProgressIndicator())
-        : TextFormField();
+        : Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextFormField(
+              autofocus: true,
+            ),
+          );
     return WillPopScope(
       onWillPop: () async => true,
       child: Scaffold(
