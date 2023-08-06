@@ -18,6 +18,14 @@ final nameEditNotifierProvider =
 class NameEditNotifier extends StateNotifier<NameEditState> {
   NameEditNotifier(this._ref) : super(const NameEditState());
 
+  Future<void> fetch() async {
+    Future.delayed(const Duration(seconds: 1)).then(
+      (_) => state = state.copyWith(
+        loading: false,
+      ),
+    );
+  }
+
   void onTextChanged(String text) {
     //state = state.copyWith(text: text.trim());
   }
