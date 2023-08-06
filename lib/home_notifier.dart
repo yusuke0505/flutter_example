@@ -10,6 +10,9 @@ class HomeState with _$HomeState {
   }) = _HomeState;
 }
 
+final homeNotifierProvider =
+    StateNotifierProvider<HomeNotifier, HomeState>((ref) => HomeNotifier(ref));
+
 class HomeNotifier extends StateNotifier<HomeState> {
   HomeNotifier(this._ref) : super(const HomeState());
 
