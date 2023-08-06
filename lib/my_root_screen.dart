@@ -14,17 +14,20 @@ class MyRootScreen extends StatelessWidget {
   const MyRootScreen({
     this.extra = const GoRouterStateExtra(),
     required this.navigationShell,
+    required this.goRouterState,
     Key? key,
   }) : super(key: key ?? const ValueKey<String>('ScaffoldWithNavBar'));
 
   final GoRouterStateExtra extra;
   final StatefulNavigationShell navigationShell;
+  final GoRouterState goRouterState;
 
   @override
   Widget build(BuildContext context) {
+    final showNavBar = goRouterState.uri.path != '/a/details';
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: extra.showNavBar
+      bottomNavigationBar: showNavBar
           ? BottomNavigationBar(
               items: <BottomNavigationBarItem>[
                 for (var i = 0; i < TabItem.values.length; i++)

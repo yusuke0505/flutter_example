@@ -27,11 +27,13 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
           if (state.extra == null) {
             return MyRootScreen(
               navigationShell: navigationShell,
+              goRouterState: state,
             );
           } else {
             return MyRootScreen(
               extra: state.extra as GoRouterStateExtra,
               navigationShell: navigationShell,
+              goRouterState: state,
             );
           }
         },
