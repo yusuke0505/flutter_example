@@ -24,7 +24,10 @@ class MyRootScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final showNavBar = goRouterState.uri.path != '/a/details';
+    const notShowNabVarPaths = [
+      '/a/details',
+    ];
+    final showNavBar = !notShowNabVarPaths.contains(goRouterState.uri.path);
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: showNavBar
