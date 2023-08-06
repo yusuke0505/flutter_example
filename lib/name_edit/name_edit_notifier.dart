@@ -28,8 +28,8 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
     );
   }
 
-  void onTextChanged(String text) {
-    //state = state.copyWith(text: text.trim());
+  void onNameChanged(String name) {
+    state = state.copyWith(name: name.trim());
   }
 
   final Ref _ref;
