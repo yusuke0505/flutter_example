@@ -10,6 +10,16 @@ class HomeState with _$HomeState {
   }) = _HomeState;
 }
 
+class PostItem {
+  const PostItem({
+    required this.name,
+    required this.body,
+  });
+
+  final String name;
+  final String body;
+}
+
 final homeNotifierProvider =
     StateNotifierProvider<HomeNotifier, HomeState>((ref) => HomeNotifier(ref));
 
