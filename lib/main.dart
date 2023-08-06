@@ -15,12 +15,16 @@ void main() {
   runApp(NestedTabNavigationExampleApp());
 }
 
+const homePath = '/home';
+const favoritePath = '/favorite';
+const myPagePath = '/my_page';
+
 class NestedTabNavigationExampleApp extends StatelessWidget {
   NestedTabNavigationExampleApp({super.key});
 
   final GoRouter _router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/home',
+    initialLocation: homePath,
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
         builder: (_, state, navigationShell) {
@@ -42,7 +46,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             navigatorKey: _sectionANavigatorKey,
             routes: <RouteBase>[
               GoRoute(
-                path: '/home',
+                path: homePath,
                 builder: (_, __) => const HomeScreen(),
                 routes: <RouteBase>[
                   GoRoute(
@@ -56,10 +60,10 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: '/favorite',
+                path: favoritePath,
                 builder: (_, __) => RootScreen(
                   label: TabItem.favorite.label,
-                  detailsPath: '/favorite/details',
+                  detailsPath: '$favoritePath/details',
                 ),
                 routes: <RouteBase>[
                   GoRoute(
@@ -73,10 +77,10 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: '/my_page',
+                path: myPagePath,
                 builder: (_, __) => RootScreen(
                   label: TabItem.myPage.label,
-                  detailsPath: '/my_page/details',
+                  detailsPath: '$myPagePath/details',
                 ),
                 routes: <RouteBase>[
                   GoRoute(
