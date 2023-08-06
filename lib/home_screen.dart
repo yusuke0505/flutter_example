@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/home_notifier.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,23 +9,27 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeNotifierProvider);
+    final children = state.loading
+        ? [
+            const Center(child: CircularProgressIndicator()),
+          ]
+        : [
+            for (var i = 0; i < 3; i++)
+              const ListTile(
+                title: Text(
+                  '名前',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                subtitle: Text('本文'),
+              ),
+          ];
     return Scaffold(
       appBar: AppBar(
         title: Text(TabItem.home.label),
       ),
-      body: ListView(
-        children: [
-          for (var i = 0; i < 3; i++)
-            const ListTile(
-              title: Text(
-                '名前',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              subtitle: Text('本文'),
-            ),
-        ],
-      ),
+      body: ListView(children: children),
       floatingActionButton: _Button(
         onTap: () {
           GoRouter.of(context).go('$homePath/$writePath');

@@ -4,6 +4,7 @@ import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_example/write_screen.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'my_root_screen.dart';
 
@@ -13,7 +14,11 @@ final GlobalKey<NavigatorState> _sectionANavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
 
 void main() {
-  runApp(NestedTabNavigationExampleApp());
+  runApp(
+    ProviderScope(
+      child: NestedTabNavigationExampleApp(),
+    ),
+  );
 }
 
 class NestedTabNavigationExampleApp extends StatelessWidget {
