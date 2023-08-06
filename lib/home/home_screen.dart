@@ -50,7 +50,7 @@ class _Tile extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(leadingSize / 2),
         child: Image.network(
-          item.imagePath,
+          item.userItem.imagePath ?? '',
           width: leadingSize,
           height: leadingSize,
           errorBuilder: (_, __, ___) {
@@ -63,7 +63,7 @@ class _Tile extends StatelessWidget {
         ),
       ),
       title: Text(
-        item.name,
+        item.userItem.name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
