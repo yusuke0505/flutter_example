@@ -29,7 +29,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
   HomeNotifier(this._ref) : super(const HomeState());
 
   Future<void> fetch() async {
-    Future.delayed(const Duration(seconds: 3)).then(
+    Future.delayed(const Duration(seconds: 1)).then(
       (_) => state = state.copyWith(
         loading: false,
         postItems: const [
