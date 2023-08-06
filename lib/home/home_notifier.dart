@@ -31,6 +31,8 @@ class HomeNotifier extends StateNotifier<HomeState> {
   HomeNotifier(this._ref) : super(const HomeState());
 
   Future<void> fetch() async {
+    const imagePath =
+        'https://www.barrel365.com/wp-content/uploads/2019/12/livet-1.jpg';
     Future.delayed(const Duration(seconds: 1)).then(
       (_) => state = state.copyWith(
         loading: false,
@@ -38,17 +40,17 @@ class HomeNotifier extends StateNotifier<HomeState> {
           PostItem(
             name: 'name3',
             body: 'body3',
-            imagePath: '',
+            imagePath: imagePath,
           ),
           PostItem(
             name: 'name2',
             body: 'body2',
-            imagePath: '',
+            imagePath: imagePath,
           ),
           PostItem(
             name: 'name1',
             body: 'body1',
-            imagePath: '',
+            imagePath: imagePath,
           ),
         ],
       ),
