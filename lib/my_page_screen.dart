@@ -25,7 +25,7 @@ class MyPageScreen extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    userState.name,
+                    userState.userItem.name,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   TextButton(

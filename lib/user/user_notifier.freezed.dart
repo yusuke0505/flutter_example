@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserState {
-  String get name => throw _privateConstructorUsedError;
   UserItem get userItem => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +28,7 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
-  $Res call({String name, UserItem userItem});
+  $Res call({UserItem userItem});
 
   $UserItemCopyWith<$Res> get userItem;
 }
@@ -47,14 +46,9 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? userItem = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
       userItem: null == userItem
           ? _value.userItem
           : userItem // ignore: cast_nullable_to_non_nullable
@@ -78,7 +72,7 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       __$$_UserStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, UserItem userItem});
+  $Res call({UserItem userItem});
 
   @override
   $UserItemCopyWith<$Res> get userItem;
@@ -95,14 +89,9 @@ class __$$_UserStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
     Object? userItem = null,
   }) {
     return _then(_$_UserState(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
       userItem: null == userItem
           ? _value.userItem
           : userItem // ignore: cast_nullable_to_non_nullable
@@ -114,19 +103,15 @@ class __$$_UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState implements _UserState {
-  const _$_UserState(
-      {this.name = defaultName, this.userItem = const UserItem()});
+  const _$_UserState({this.userItem = const UserItem()});
 
-  @override
-  @JsonKey()
-  final String name;
   @override
   @JsonKey()
   final UserItem userItem;
 
   @override
   String toString() {
-    return 'UserState(name: $name, userItem: $userItem)';
+    return 'UserState(userItem: $userItem)';
   }
 
   @override
@@ -134,13 +119,12 @@ class _$_UserState implements _UserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserState &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.userItem, userItem) ||
                 other.userItem == userItem));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, userItem);
+  int get hashCode => Object.hash(runtimeType, userItem);
 
   @JsonKey(ignore: true)
   @override
@@ -150,11 +134,8 @@ class _$_UserState implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({final String name, final UserItem userItem}) =
-      _$_UserState;
+  const factory _UserState({final UserItem userItem}) = _$_UserState;
 
-  @override
-  String get name;
   @override
   UserItem get userItem;
   @override

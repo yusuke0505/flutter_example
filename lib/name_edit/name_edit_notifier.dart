@@ -24,7 +24,7 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
     Future.delayed(const Duration(seconds: 1)).then(
       (_) => state = state.copyWith(
         loading: false,
-        name: _userState.name,
+        name: _userState.userItem.name,
       ),
     );
   }

@@ -66,7 +66,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
     state = state.copyWith(
       postItems: [
         PostItem(
-          name: _userState.name,
+          name: _userState.userItem.name,
           body: body,
           imagePath: '',
         ),
