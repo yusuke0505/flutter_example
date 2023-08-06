@@ -17,7 +17,7 @@ class WriteScreen extends HookConsumerWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Details Screen'),
+          title: const Text('投稿'),
         ),
         body: SingleChildScrollView(
           child: Column(
