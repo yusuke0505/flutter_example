@@ -46,8 +46,6 @@ class _Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const leadingSize = 40.0;
-    const imagePath =
-        'https://www.barrel365.com/wp-content/uploads/2019/12/livet-1.jpg';
     return ListTile(
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(leadingSize / 2),
