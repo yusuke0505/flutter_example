@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: _Button(
         onTap: () {
-          GoRouter.of(context).go('/a/details');
+          GoRouter.of(context).go('/home/write');
         },
       ),
     );

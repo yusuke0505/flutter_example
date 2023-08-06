@@ -25,7 +25,7 @@ class MyRootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const notShowNabVarPaths = [
-      '/a/details',
+      '/home/write',
     ];
     final showNavBar = !notShowNabVarPaths.contains(goRouterState.uri.path);
     return Scaffold(
