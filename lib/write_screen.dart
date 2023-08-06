@@ -43,6 +43,7 @@ class WriteScreen extends HookConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: _Button(
+                  enable: state.text.isNotEmpty,
                   onTap: () {
                     homeNotifier.post(state.text);
                     GoRouter.of(context).pop();
@@ -60,15 +61,17 @@ class WriteScreen extends HookConsumerWidget {
 class _Button extends StatelessWidget {
   const _Button({
     required this.onTap,
+    required this.enable,
   });
 
   final VoidCallback onTap;
+  final bool enable;
 
   @override
   Widget build(BuildContext context) {
     const radius = 4.0;
     return Material(
-      color: Colors.blue,
+      color: Colors.blue.withOpacity(enable ? 1 : 0.5),
       borderRadius: BorderRadius.circular(radius),
       child: InkWell(
         onTap: onTap,
