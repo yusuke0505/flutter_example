@@ -10,6 +10,9 @@ class UserState with _$UserState {
   }) = _UserState;
 }
 
+final userNotifierProvider =
+    StateNotifierProvider<UserNotifier, UserState>((ref) => UserNotifier(ref));
+
 class UserNotifier extends StateNotifier<UserState> {
   UserNotifier(this._ref) : super(const UserState());
 
