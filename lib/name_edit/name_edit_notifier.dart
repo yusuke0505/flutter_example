@@ -6,6 +6,7 @@ part 'name_edit_notifier.freezed.dart';
 @freezed
 class NameEditState with _$NameEditState {
   const factory NameEditState({
+    @Default(true) bool loading,
     @Default('名前未設定') String name,
   }) = _NameEditState;
 }
