@@ -45,10 +45,10 @@ class HomeNotifier extends StateNotifier<HomeState> {
     fetch();
   }
 
-  Future<void> post() async {
+  Future<void> post(String body) async {
     state = state.copyWith(
       postItems: [
-        const PostItem(name: 'name3', body: 'body3'),
+        PostItem(name: 'name3', body: body),
         ...state.postItems,
       ],
     );

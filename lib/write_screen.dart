@@ -32,7 +32,7 @@ class WriteScreen extends HookConsumerWidget {
                 padding: const EdgeInsets.all(16),
                 child: _Button(
                   onTap: () {
-                    homeNotifier.post();
+                    homeNotifier.post('post');
                     GoRouter.of(context).pop();
                   },
                 ),
