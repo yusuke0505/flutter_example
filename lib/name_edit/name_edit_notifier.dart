@@ -33,6 +33,8 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
     state = state.copyWith(name: name.trim());
   }
 
+  void post() {}
+
   final Ref _ref;
   UserState get _userState => _ref.read(userNotifierProvider);
 }

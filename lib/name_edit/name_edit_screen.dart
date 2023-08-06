@@ -34,6 +34,9 @@ class NameEditScreen extends HookConsumerWidget {
                   controller: textEditingController,
                   autofocus: true,
                   maxLength: 10,
+                  onChanged: (val) {
+                    notifier.onNameChanged(val);
+                  },
                 ),
               ),
               Padding(
@@ -42,6 +45,7 @@ class NameEditScreen extends HookConsumerWidget {
                   label: '更新',
                   enable: state.name.isNotEmpty,
                   onTap: () {
+                    notifier.post();
                     GoRouter.of(context).pop();
                   },
                 ),
