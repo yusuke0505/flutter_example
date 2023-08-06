@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/home_notifier.dart';
+import 'package:flutter_example/write_notifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +10,8 @@ class WriteScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(writeNotifierProvider);
+    final notifier = ref.watch(writeNotifierProvider.notifier);
     final homeNotifier = ref.watch(homeNotifierProvider.notifier);
     final textEditingController = useTextEditingController();
     return GestureDetector(
@@ -32,13 +35,16 @@ class WriteScreen extends HookConsumerWidget {
                   controller: textEditingController,
                   maxLines: null,
                   autofocus: true,
+                  onChanged: (val) {
+                    notifier.onTextChanged(val);
+                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: _Button(
                   onTap: () {
-                    homeNotifier.post(textEditingController.text);
+                    homeNotifier.post(state.text);
                     GoRouter.of(context).pop();
                   },
                 ),

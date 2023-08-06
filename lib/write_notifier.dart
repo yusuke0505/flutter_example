@@ -16,5 +16,9 @@ final writeNotifierProvider = StateNotifierProvider<WriteNotifier, WriteState>(
 class WriteNotifier extends StateNotifier<WriteState> {
   WriteNotifier(this._ref) : super(const WriteState());
 
+  void onTextChanged(String text) {
+    state = state.copyWith(text: text);
+  }
+
   final Ref _ref;
 }
