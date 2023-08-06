@@ -1,3 +1,4 @@
+import 'package:flutter_example/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -48,11 +49,12 @@ class HomeNotifier extends StateNotifier<HomeState> {
   Future<void> post(String body) async {
     state = state.copyWith(
       postItems: [
-        PostItem(name: 'name3', body: body),
+        PostItem(name: _userState.name, body: body),
         ...state.postItems,
       ],
     );
   }
 
   final Ref _ref;
+  UserState get _userState => _ref.read(userNotifierProvider);
 }
