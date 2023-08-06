@@ -6,27 +6,20 @@ class WriteScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final counter = useState(0);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details Screen'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              'Counter: ${counter.value}',
-              style: Theme.of(context).textTheme.titleLarge,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextFormField(
+                maxLines: null,
+                autofocus: true,
+              ),
             ),
-            const Padding(padding: EdgeInsets.all(4)),
-            TextButton(
-              onPressed: () {
-                counter.value = counter.value + 1;
-              },
-              child: const Text('Increment counter'),
-            ),
-            const Padding(padding: EdgeInsets.all(8)),
           ],
         ),
       ),
