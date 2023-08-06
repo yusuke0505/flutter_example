@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
 class WriteScreen extends HookWidget {
   const WriteScreen({super.key});
@@ -28,7 +29,9 @@ class WriteScreen extends HookWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: _Button(
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).pop();
+                  },
                 ),
               ),
             ],
@@ -53,7 +56,7 @@ class _Button extends StatelessWidget {
       color: Colors.blue,
       borderRadius: BorderRadius.circular(radius),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         borderRadius: BorderRadius.circular(radius),
         child: DecoratedBox(
           decoration: BoxDecoration(
