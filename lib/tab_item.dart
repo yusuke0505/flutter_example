@@ -22,3 +22,9 @@ enum TabItem {
   final String label;
   final Icon icon;
 }
+
+const homePath = '/home';
+const favoritePath = '/favorite';
+const myPagePath = '/my_page';
+const writePath = 'write';
+const detailsPath = 'details';

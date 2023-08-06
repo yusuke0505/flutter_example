@@ -15,12 +15,6 @@ void main() {
   runApp(NestedTabNavigationExampleApp());
 }
 
-const homePath = '/home';
-const favoritePath = '/favorite';
-const myPagePath = '/my_page';
-const writePath = 'write';
-const detailsPath = 'details';
-
 class NestedTabNavigationExampleApp extends StatelessWidget {
   NestedTabNavigationExampleApp({super.key});
 
