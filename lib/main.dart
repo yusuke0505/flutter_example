@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/home_screen.dart';
 import 'package:flutter_example/my_page_screen.dart';
+import 'package:flutter_example/name_edit_screen.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_example/write_screen.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -84,8 +85,8 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 builder: (_, __) => const MyPageScreen(),
                 routes: <RouteBase>[
                   GoRoute(
-                    path: detailsPath,
-                    builder: (_, __) => const DetailsScreen(),
+                    path: nameEditPath,
+                    builder: (_, __) => const NameEditScreen(),
                   ),
                 ],
               ),

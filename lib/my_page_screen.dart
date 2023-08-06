@@ -30,7 +30,7 @@ class MyPageScreen extends HookConsumerWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      GoRouter.of(context).go('$myPagePath/$detailsPath');
+                      GoRouter.of(context).go('$myPagePath/$nameEditPath');
                     },
                     child: const Text('編集'),
                   ),

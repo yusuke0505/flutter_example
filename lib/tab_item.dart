@@ -28,3 +28,4 @@ const favoritePath = '/favorite';
 const myPagePath = '/my_page';
 const writePath = 'write';
 const detailsPath = 'details';
+const nameEditPath = 'name_edit';
