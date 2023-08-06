@@ -1,3 +1,4 @@
+import 'package:flutter_example/constants.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,7 +9,7 @@ part 'name_edit_notifier.freezed.dart';
 class NameEditState with _$NameEditState {
   const factory NameEditState({
     @Default(true) bool loading,
-    @Default('名前未設定') String name,
+    @Default(defaultName) String name,
   }) = _NameEditState;
 }
 
