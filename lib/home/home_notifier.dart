@@ -15,15 +15,11 @@ class HomeState with _$HomeState {
 
 class PostItem {
   const PostItem({
-    required this.name,
     required this.body,
-    required this.imagePath,
     required this.userItem,
   });
 
-  final String name;
   final String body;
-  final String imagePath;
   final UserItem userItem;
 }
 
@@ -41,27 +37,21 @@ class HomeNotifier extends StateNotifier<HomeState> {
         loading: false,
         postItems: const [
           PostItem(
-            name: 'name3',
             body: 'body3',
-            imagePath: imagePath,
             userItem: UserItem(
               name: 'name3',
               imagePath: imagePath,
             ),
           ),
           PostItem(
-            name: 'name2',
             body: 'body2',
-            imagePath: imagePath,
             userItem: UserItem(
               name: 'name2',
               imagePath: imagePath,
             ),
           ),
           PostItem(
-            name: 'name1',
             body: 'body1',
-            imagePath: imagePath,
             userItem: UserItem(
               name: 'name1',
               imagePath: imagePath,
@@ -81,9 +71,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
     state = state.copyWith(
       postItems: [
         PostItem(
-          name: _userState.userItem.name,
           body: body,
-          imagePath: '',
           userItem: _userState.userItem,
         ),
         ...state.postItems,
