@@ -18,18 +18,21 @@ class HomeScreen extends HookConsumerWidget {
     }, const []);
     final body = state.loading
         ? const Center(child: CircularProgressIndicator())
-        : ListView(
-            children: [
-              for (var i = 0; i < 3; i++)
-                const ListTile(
-                  title: Text(
-                    '名前',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+        : RefreshIndicator(
+            onRefresh: () async {},
+            child: ListView(
+              children: [
+                for (var i = 0; i < 3; i++)
+                  const ListTile(
+                    title: Text(
+                      '名前',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text('本文'),
                   ),
-                  subtitle: Text('本文'),
-                ),
-            ],
+              ],
+            ),
           );
     return Scaffold(
       appBar: AppBar(
