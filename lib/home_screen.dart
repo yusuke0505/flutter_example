@@ -22,14 +22,14 @@ class HomeScreen extends HookConsumerWidget {
             onRefresh: notifier.refresh,
             child: ListView(
               children: [
-                for (var i = 0; i < 3; i++)
-                  const ListTile(
+                for (var i = 0; i < state.postItems.length; i++)
+                  ListTile(
                     title: Text(
-                      '名前',
+                      state.postItems[i].name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    subtitle: Text('本文'),
+                    subtitle: Text(state.postItems[i].body),
                   ),
               ],
             ),
