@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/main.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,7 +26,7 @@ class MyRootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const notShowNabVarPaths = [
-      '/home/write',
+      '$homePath/$writePath',
     ];
     final showNavBar = !notShowNabVarPaths.contains(goRouterState.uri.path);
     return Scaffold(

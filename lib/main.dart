@@ -18,6 +18,8 @@ void main() {
 const homePath = '/home';
 const favoritePath = '/favorite';
 const myPagePath = '/my_page';
+const writePath = 'write';
+const detailsPath = 'details';
 
 class NestedTabNavigationExampleApp extends StatelessWidget {
   NestedTabNavigationExampleApp({super.key});
@@ -50,7 +52,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 builder: (_, __) => const HomeScreen(),
                 routes: <RouteBase>[
                   GoRoute(
-                    path: 'write',
+                    path: writePath,
                     builder: (_, __) => const DetailsScreen(),
                   ),
                 ],
@@ -63,11 +65,11 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 path: favoritePath,
                 builder: (_, __) => RootScreen(
                   label: TabItem.favorite.label,
-                  detailsPath: '$favoritePath/details',
+                  detailsPath: '$favoritePath/$detailsPath',
                 ),
                 routes: <RouteBase>[
                   GoRoute(
-                    path: 'details',
+                    path: detailsPath,
                     builder: (_, __) => const DetailsScreen(),
                   ),
                 ],
@@ -80,11 +82,11 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 path: myPagePath,
                 builder: (_, __) => RootScreen(
                   label: TabItem.myPage.label,
-                  detailsPath: '$myPagePath/details',
+                  detailsPath: '$myPagePath/$detailsPath',
                 ),
                 routes: <RouteBase>[
                   GoRoute(
-                    path: 'details',
+                    path: detailsPath,
                     builder: (_, __) => const DetailsScreen(),
                   ),
                 ],
