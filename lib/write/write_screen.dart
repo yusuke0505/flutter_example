@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/home/home_notifier.dart';
+import 'package:flutter_example/post_button.dart';
 import 'package:flutter_example/write/write_notifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +43,8 @@ class WriteScreen extends HookConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: _Button(
+                child: PostButton(
+                  label: '投稿',
                   enable: state.text.isNotEmpty,
                   onTap: () {
                     homeNotifier.post(state.text);
@@ -51,44 +53,6 @@ class WriteScreen extends HookConsumerWidget {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Button extends StatelessWidget {
-  const _Button({
-    required this.onTap,
-    required this.enable,
-  });
-
-  final VoidCallback onTap;
-  final bool enable;
-
-  @override
-  Widget build(BuildContext context) {
-    const radius = 4.0;
-    return Material(
-      color: Colors.blue.withOpacity(enable ? 1 : 0.5),
-      borderRadius: BorderRadius.circular(radius),
-      child: InkWell(
-        onTap: enable ? onTap : null,
-        borderRadius: BorderRadius.circular(radius),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Text(
-              '投稿',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
           ),
         ),
       ),
