@@ -17,5 +17,9 @@ final userNotifierProvider =
 class UserNotifier extends StateNotifier<UserState> {
   UserNotifier(this._ref) : super(const UserState());
 
+  void changeName(String name) {
+    state = state.copyWith(name: name);
+  }
+
   final Ref _ref;
 }
