@@ -21,17 +21,26 @@ class HomeScreen extends HookConsumerWidget {
         : RefreshIndicator(
             onRefresh: notifier.refresh,
             child: ListView(
-              children: [
-                for (var i = 0; i < state.postItems.length; i++)
-                  ListTile(
-                    title: Text(
-                      state.postItems[i].name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+              children: state.postItems
+                  .map(
+                    (e) => ListTile(
+                      leading: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.blue,
+                        ),
+                      ),
+                      title: Text(
+                        e.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      subtitle: Text(e.body),
                     ),
-                    subtitle: Text(state.postItems[i].body),
-                  ),
-              ],
+                  )
+                  .toList(),
             ),
           );
     return Scaffold(
