@@ -32,9 +32,9 @@ class HomeNotifier extends StateNotifier<HomeState> {
       (_) => state = state.copyWith(
         loading: false,
         postItems: const [
-          PostItem(name: 'name1', body: 'body1'),
-          PostItem(name: 'name2', body: 'body2'),
           PostItem(name: 'name3', body: 'body3'),
+          PostItem(name: 'name2', body: 'body2'),
+          PostItem(name: 'name1', body: 'body1'),
         ],
       ),
     );
@@ -43,6 +43,15 @@ class HomeNotifier extends StateNotifier<HomeState> {
   Future<void> refresh() async {
     state = state.copyWith(loading: true);
     fetch();
+  }
+
+  Future<void> post() async {
+    state = state.copyWith(
+      postItems: [
+        const PostItem(name: 'name3', body: 'body3'),
+        ...state.postItems,
+      ],
+    );
   }
 
   final Ref _ref;
