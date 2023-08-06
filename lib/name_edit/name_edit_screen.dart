@@ -10,6 +10,7 @@ class NameEditScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(nameEditNotifierProvider);
     final notifier = ref.watch(nameEditNotifierProvider.notifier);
+    final textEditingController = useTextEditingController();
     useEffect(() {
       notifier.fetch();
       return null;
@@ -19,6 +20,7 @@ class NameEditScreen extends HookConsumerWidget {
         : Padding(
             padding: const EdgeInsets.all(16),
             child: TextFormField(
+              controller: textEditingController,
               autofocus: true,
             ),
           );
