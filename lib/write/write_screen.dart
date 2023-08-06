@@ -36,6 +36,7 @@ class WriteScreen extends HookConsumerWidget {
                   controller: textEditingController,
                   maxLines: null,
                   autofocus: true,
+                  maxLength: 140,
                   onChanged: (val) {
                     notifier.onTextChanged(val);
                   },
