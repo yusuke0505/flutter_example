@@ -21,10 +21,13 @@ class WriteScreen extends HookConsumerWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Padding(
+              Container(
+                height: 240,
                 padding: const EdgeInsets.all(16),
+                alignment: Alignment.bottomCenter,
                 child: TextFormField(
                   controller: textEditingController,
                   maxLines: null,
