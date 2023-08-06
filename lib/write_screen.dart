@@ -74,7 +74,7 @@ class _Button extends StatelessWidget {
       color: Colors.blue.withOpacity(enable ? 1 : 0.5),
       borderRadius: BorderRadius.circular(radius),
       child: InkWell(
-        onTap: onTap,
+        onTap: enable ? onTap : null,
         borderRadius: BorderRadius.circular(radius),
         child: DecoratedBox(
           decoration: BoxDecoration(
