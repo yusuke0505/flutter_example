@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/home/home_screen.dart';
 import 'package:flutter_example/my_page_screen.dart';
-import 'package:flutter_example/name_edit_screen.dart';
+import 'package:flutter_example/name_edit/name_edit_screen.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_example/write/write_screen.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
