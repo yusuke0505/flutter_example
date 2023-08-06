@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/name_edit/name_edit_notifier.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NameEditScreen extends HookConsumerWidget {
@@ -9,6 +10,10 @@ class NameEditScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(nameEditNotifierProvider);
     final notifier = ref.watch(nameEditNotifierProvider.notifier);
+    useEffect(() {
+      notifier.fetch();
+      return null;
+    }, const []);
     final body = state.loading
         ? const Center(child: CircularProgressIndicator())
         : TextFormField();
