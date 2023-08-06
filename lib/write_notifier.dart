@@ -17,7 +17,7 @@ class WriteNotifier extends StateNotifier<WriteState> {
   WriteNotifier(this._ref) : super(const WriteState());
 
   void onTextChanged(String text) {
-    state = state.copyWith(text: text);
+    state = state.copyWith(text: text.trim());
   }
 
   final Ref _ref;
