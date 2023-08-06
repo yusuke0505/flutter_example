@@ -9,18 +9,16 @@ class NameEditScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(nameEditNotifierProvider);
     final notifier = ref.watch(nameEditNotifierProvider.notifier);
+    final body = state.loading
+        ? const Center(child: CircularProgressIndicator())
+        : TextFormField();
     return WillPopScope(
       onWillPop: () async => true,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('名前編集'),
         ),
-        body: const Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[],
-          ),
-        ),
+        body: body,
       ),
     );
   }
