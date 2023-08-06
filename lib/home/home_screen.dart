@@ -52,9 +52,16 @@ class _Tile extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(leadingSize / 2),
         child: Image.network(
-          imagePath,
+          item.imagePath,
           width: leadingSize,
           height: leadingSize,
+          errorBuilder: (_, __, ___) {
+            return Container(
+              width: leadingSize,
+              height: leadingSize,
+              color: Colors.grey,
+            );
+          },
         ),
       ),
       title: Text(
