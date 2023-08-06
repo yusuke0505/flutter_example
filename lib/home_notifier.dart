@@ -21,5 +21,10 @@ class HomeNotifier extends StateNotifier<HomeState> {
         .then((_) => state = state.copyWith(loading: false));
   }
 
+  Future<void> refresh() async {
+    state = state.copyWith(loading: true);
+    fetch();
+  }
+
   final Ref _ref;
 }

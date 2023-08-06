@@ -19,7 +19,7 @@ class HomeScreen extends HookConsumerWidget {
     final body = state.loading
         ? const Center(child: CircularProgressIndicator())
         : RefreshIndicator(
-            onRefresh: () async {},
+            onRefresh: notifier.refresh,
             child: ListView(
               children: [
                 for (var i = 0; i < 3; i++)
