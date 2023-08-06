@@ -1,3 +1,4 @@
+import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -22,6 +23,7 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
     Future.delayed(const Duration(seconds: 1)).then(
       (_) => state = state.copyWith(
         loading: false,
+        name: _userState.name,
       ),
     );
   }
@@ -31,4 +33,5 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
   }
 
   final Ref _ref;
+  UserState get _userState => _ref.read(userNotifierProvider);
 }
