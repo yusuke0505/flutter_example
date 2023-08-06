@@ -15,6 +15,12 @@ class NameEditScreen extends HookConsumerWidget {
       notifier.fetch();
       return null;
     }, const []);
+    useEffect(() {
+      if (!state.loading) {
+        textEditingController.text = state.name;
+      }
+      return null;
+    }, [state.loading]);
     final body = state.loading
         ? const Center(child: CircularProgressIndicator())
         : Padding(
