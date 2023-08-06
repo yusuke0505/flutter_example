@@ -1,3 +1,4 @@
+import 'package:flutter_example/data/user_item/user_item.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,11 +18,13 @@ class PostItem {
     required this.name,
     required this.body,
     required this.imagePath,
+    required this.userItem,
   });
 
   final String name;
   final String body;
   final String imagePath;
+  final UserItem userItem;
 }
 
 final homeNotifierProvider =
@@ -41,16 +44,28 @@ class HomeNotifier extends StateNotifier<HomeState> {
             name: 'name3',
             body: 'body3',
             imagePath: imagePath,
+            userItem: UserItem(
+              name: 'name3',
+              imagePath: imagePath,
+            ),
           ),
           PostItem(
             name: 'name2',
             body: 'body2',
             imagePath: imagePath,
+            userItem: UserItem(
+              name: 'name2',
+              imagePath: imagePath,
+            ),
           ),
           PostItem(
             name: 'name1',
             body: 'body1',
             imagePath: imagePath,
+            userItem: UserItem(
+              name: 'name1',
+              imagePath: imagePath,
+            ),
           ),
         ],
       ),
@@ -69,6 +84,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           name: _userState.userItem.name,
           body: body,
           imagePath: '',
+          userItem: _userState.userItem,
         ),
         ...state.postItems,
       ],
