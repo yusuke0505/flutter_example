@@ -28,6 +28,7 @@ class NameEditScreen extends HookConsumerWidget {
             child: TextFormField(
               controller: textEditingController,
               autofocus: true,
+              maxLength: 10,
             ),
           );
     return WillPopScope(
