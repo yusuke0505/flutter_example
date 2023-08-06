@@ -21,26 +21,7 @@ class HomeScreen extends HookConsumerWidget {
         : RefreshIndicator(
             onRefresh: notifier.refresh,
             child: ListView(
-              children: state.postItems
-                  .map(
-                    (e) => ListTile(
-                      leading: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.blue,
-                        ),
-                      ),
-                      title: Text(
-                        e.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Text(e.body),
-                    ),
-                  )
-                  .toList(),
+              children: state.postItems.map((e) => _Tile(item: e)).toList(),
             ),
           );
     return Scaffold(
@@ -53,6 +34,33 @@ class HomeScreen extends HookConsumerWidget {
           GoRouter.of(context).go('$homePath/$writePath');
         },
       ),
+    );
+  }
+}
+
+class _Tile extends StatelessWidget {
+  const _Tile({required this.item});
+
+  final PostItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    const leadingSize = 40.0;
+    return ListTile(
+      leading: Container(
+        width: leadingSize,
+        height: leadingSize,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(leadingSize / 2),
+          color: Colors.blue,
+        ),
+      ),
+      title: Text(
+        item.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      subtitle: Text(item.body),
     );
   }
 }
