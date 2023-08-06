@@ -7,6 +7,7 @@ part 'home_notifier.freezed.dart';
 class HomeState with _$HomeState {
   const factory HomeState({
     @Default(true) bool loading,
+    @Default(<PostItem>[]) List<PostItem> postItems,
   }) = _HomeState;
 }
 
@@ -27,8 +28,16 @@ class HomeNotifier extends StateNotifier<HomeState> {
   HomeNotifier(this._ref) : super(const HomeState());
 
   Future<void> fetch() async {
-    Future.delayed(const Duration(seconds: 3))
-        .then((_) => state = state.copyWith(loading: false));
+    Future.delayed(const Duration(seconds: 3)).then(
+      (_) => state = state.copyWith(
+        loading: false,
+        postItems: const [
+          PostItem(name: 'name1', body: 'body1'),
+          PostItem(name: 'name2', body: 'body2'),
+          PostItem(name: 'name3', body: 'body3'),
+        ],
+      ),
+    );
   }
 
   Future<void> refresh() async {
