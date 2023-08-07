@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_example/data/user_item/user_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,7 +23,7 @@ class UserNotifier extends StateNotifier<UserState> {
     state = state.copyWith(user: FirebaseAuth.instance.currentUser);
   }
 
-  Future<void> createUser({
+  Future<bool> createUser({
     required String email,
     required String password,
   }) async {
@@ -34,9 +33,14 @@ class UserNotifier extends StateNotifier<UserState> {
         email: email,
         password: password,
       );
-      state = state.copyWith(user: credential.user);
+      final user = credential.user;
+      if (user == null) {
+        return false;
+      }
+      state = state.copyWith(user: user);
+      return true;
     } catch (e) {
-      debugPrint(e.toString());
+      return false;
     }
   }
 

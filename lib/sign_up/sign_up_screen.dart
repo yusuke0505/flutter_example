@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/constants.dart';
 import 'package:flutter_example/post_button.dart';
+import 'package:flutter_example/user/user_notifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SignUpScreen extends HookWidget {
+class SignUpScreen extends HookConsumerWidget {
   const SignUpScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final emailTextEditingController = useTextEditingController();
     final passwordTextEditingController = useTextEditingController();
@@ -65,9 +67,20 @@ class SignUpScreen extends HookWidget {
                   PostButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('新規登録に成功しました')),
-                        );
+                        ref
+                            .read(userNotifierProvider.notifier)
+                            .createUser(
+                              email: emailTextEditingController.text,
+                              password: passwordTextEditingController.text,
+                            )
+                            .then((value) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  Text(value ? '新規登録に成功しました' : '新規登録に失敗しました'),
+                            ),
+                          );
+                        });
                       }
                     },
                     enable: true,

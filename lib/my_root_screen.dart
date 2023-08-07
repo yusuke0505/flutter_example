@@ -31,7 +31,9 @@ class MyRootScreen extends HookConsumerWidget {
     final userState = ref.watch(userNotifierProvider);
     final userNotifier = ref.watch(userNotifierProvider.notifier);
     useEffect(() {
-      userNotifier.fetchUser();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        userNotifier.fetchUser();
+      });
       return null;
     }, const []);
     const notShowNabVarPaths = [
