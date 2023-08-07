@@ -45,6 +45,15 @@ class SignUpScreen extends HookWidget {
                     labelText: 'パスワード',
                     hintText: '8文字以上',
                   ),
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return '入力してください';
+                    }
+                    if (value!.length < 8) {
+                      return '8文字以上入力してください';
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(height: 40),
@@ -64,7 +73,13 @@ class SignUpScreen extends HookWidget {
                   ),
                   const SizedBox(width: 40),
                   PostButton(
-                    onTap: () {},
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('ログインに成功しました')),
+                        );
+                      }
+                    },
                     enable: true,
                     label: 'ログイン',
                   ),
