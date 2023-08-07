@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/constants.dart';
 import 'package:flutter_example/post_button.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -27,13 +28,10 @@ class SignUpScreen extends HookWidget {
                     if (value?.isEmpty ?? true) {
                       return '入力してください';
                     }
-                    RegExp regex = RegExp(
-                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
-                    if (!regex.hasMatch(value!)) {
+                    if (!RegExp(validEMailAddressRegExp).hasMatch(value!)) {
                       return '無効なメールアドレスです';
-                    } else {
-                      return null;
                     }
+                    return null;
                   },
                 ),
               ),
