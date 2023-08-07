@@ -44,6 +44,16 @@ class UserNotifier extends StateNotifier<UserState> {
     }
   }
 
+  Future<bool> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      state = state.copyWith(user: null);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   void changeName(String name) {
     state = state.copyWith(userItem: state.userItem.copyWith(name: name));
   }
