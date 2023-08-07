@@ -15,11 +15,19 @@ class SignUpScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(16),
-              child: TextFormField(),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'メールアドレス',
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: TextFormField(),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                    hintText: 'パスワード',
+                ),
+              ),
             ),
             const SizedBox(height: 40),
             Row(
