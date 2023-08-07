@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserItem {
+  String get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get imagePath => throw _privateConstructorUsedError;
 
@@ -29,7 +30,7 @@ abstract class $UserItemCopyWith<$Res> {
   factory $UserItemCopyWith(UserItem value, $Res Function(UserItem) then) =
       _$UserItemCopyWithImpl<$Res, UserItem>;
   @useResult
-  $Res call({String name, String? imagePath});
+  $Res call({String uid, String name, String? imagePath});
 }
 
 /// @nodoc
@@ -45,10 +46,15 @@ class _$UserItemCopyWithImpl<$Res, $Val extends UserItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uid = null,
     Object? name = null,
     Object? imagePath = freezed,
   }) {
     return _then(_value.copyWith(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -68,7 +74,7 @@ abstract class _$$_UserItemCopyWith<$Res> implements $UserItemCopyWith<$Res> {
       __$$_UserItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String? imagePath});
+  $Res call({String uid, String name, String? imagePath});
 }
 
 /// @nodoc
@@ -82,10 +88,15 @@ class __$$_UserItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uid = null,
     Object? name = null,
     Object? imagePath = freezed,
   }) {
     return _then(_$_UserItem(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -100,9 +111,13 @@ class __$$_UserItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserItem implements _UserItem {
-  const _$_UserItem({this.name = defaultName, this.imagePath});
+class _$_UserItem extends _UserItem {
+  const _$_UserItem(
+      {required this.uid, this.name = defaultName, this.imagePath})
+      : super._();
 
+  @override
+  final String uid;
   @override
   @JsonKey()
   final String name;
@@ -111,7 +126,7 @@ class _$_UserItem implements _UserItem {
 
   @override
   String toString() {
-    return 'UserItem(name: $name, imagePath: $imagePath)';
+    return 'UserItem(uid: $uid, name: $name, imagePath: $imagePath)';
   }
 
   @override
@@ -119,13 +134,14 @@ class _$_UserItem implements _UserItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserItem &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, imagePath);
+  int get hashCode => Object.hash(runtimeType, uid, name, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -134,10 +150,15 @@ class _$_UserItem implements _UserItem {
       __$$_UserItemCopyWithImpl<_$_UserItem>(this, _$identity);
 }
 
-abstract class _UserItem implements UserItem {
-  const factory _UserItem({final String name, final String? imagePath}) =
-      _$_UserItem;
+abstract class _UserItem extends UserItem {
+  const factory _UserItem(
+      {required final String uid,
+      final String name,
+      final String? imagePath}) = _$_UserItem;
+  const _UserItem._() : super._();
 
+  @override
+  String get uid;
   @override
   String get name;
   @override

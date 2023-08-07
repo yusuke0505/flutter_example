@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_example/data/user_item/user_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,7 +10,7 @@ part 'user_notifier.freezed.dart';
 class UserState with _$UserState {
   const factory UserState({
     User? user,
-    @Default(UserItem()) UserItem userItem,
+    @Default(UserItem(uid: '')) UserItem userItem,
   }) = _UserState;
 }
 
@@ -73,8 +74,14 @@ class UserNotifier extends StateNotifier<UserState> {
     }
   }
 
-  void changeName(String name) {
+  Future<void> changeName(String name) async {
+    final db = FirebaseFirestore.instance;
+    final docRef = db.collection("users").doc(state.user!.uid).withConverter(
+          fromFirestore: UserItem.fromFirestore,
+          toFirestore: (user, _) => user.toFirestore(),
+        );
     state = state.copyWith(userItem: state.userItem.copyWith(name: name));
+    await docRef.set(state.userItem);
   }
 
   final Ref _ref;

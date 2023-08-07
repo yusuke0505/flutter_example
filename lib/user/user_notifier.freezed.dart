@@ -114,7 +114,7 @@ class __$$_UserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UserState implements _UserState {
-  const _$_UserState({this.user, this.userItem = const UserItem()});
+  const _$_UserState({this.user, this.userItem = const UserItem(uid: '')});
 
   @override
   final User? user;

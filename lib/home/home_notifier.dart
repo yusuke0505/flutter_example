@@ -39,6 +39,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           PostItem(
             body: 'body3',
             userItem: UserItem(
+              uid: '',
               name: 'name3',
               imagePath: imagePath,
             ),
@@ -46,6 +47,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           PostItem(
             body: 'body2',
             userItem: UserItem(
+              uid: '',
               name: 'name2',
               imagePath: imagePath,
             ),
@@ -53,6 +55,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           PostItem(
             body: 'body1',
             userItem: UserItem(
+              uid: '',
               name: 'name1',
               imagePath: imagePath,
             ),
