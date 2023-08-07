@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_example/post_button.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:go_router/go_router.dart';
 
@@ -53,6 +54,32 @@ class MyRootScreen extends StatelessWidget {
                   )
                 : null,
           )
-        : const Scaffold(body: Center(child: Text('未ログイン')));
+        : Scaffold(
+            appBar: AppBar(
+              title: const Text('新規登録/ログイン'),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextFormField(),
+                  TextFormField(),
+                  Row(
+                    children: [
+                      PostButton(
+                        onTap: () {},
+                        enable: true,
+                        label: '新規登録',
+                      ),
+                      PostButton(
+                        onTap: () {},
+                        enable: true,
+                        label: 'ログイン',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 }
