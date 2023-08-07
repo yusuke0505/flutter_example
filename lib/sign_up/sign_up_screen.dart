@@ -13,6 +13,7 @@ class SignUpScreen extends HookConsumerWidget {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final emailTextEditingController = useTextEditingController();
     final passwordTextEditingController = useTextEditingController();
+    final userNotifier = ref.watch(userNotifierProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: const Text('新規登録/ログイン'),
@@ -67,12 +68,11 @@ class SignUpScreen extends HookConsumerWidget {
                   PostButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        ref
-                            .read(userNotifierProvider.notifier)
+                        userNotifier
                             .createUser(
-                              email: emailTextEditingController.text,
-                              password: passwordTextEditingController.text,
-                            )
+                          email: emailTextEditingController.text,
+                          password: passwordTextEditingController.text,
+                        )
                             .then((value) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
