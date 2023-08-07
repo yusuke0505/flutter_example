@@ -24,12 +24,12 @@ class SignUpScreen extends HookWidget {
                     labelText: 'メールアドレス',
                   ),
                   validator: (value) {
-                    if (value == null) {
+                    if (value?.isEmpty ?? true) {
                       return '入力してください';
                     }
                     RegExp regex = RegExp(
                         r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
-                    if (!regex.hasMatch(value)) {
+                    if (!regex.hasMatch(value!)) {
                       return '無効なメールアドレスです';
                     } else {
                       return null;
