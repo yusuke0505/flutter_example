@@ -10,6 +10,7 @@ class MyPageScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(userNotifierProvider);
+    final userNotifier = ref.watch(userNotifierProvider.notifier);
     final label = TabItem.myPage.label;
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +42,13 @@ class MyPageScreen extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextButton(
               onPressed: () {
-                GoRouter.of(context).go('$myPagePath/$nameEditPath');
+                userNotifier.signOut().then((value) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(value ? 'ログアウトに成功しました' : 'ログアウトに失敗しました'),
+                    ),
+                  );
+                });
               },
               child: const Text('ログアウト'),
             ),
