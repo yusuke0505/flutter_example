@@ -61,15 +61,24 @@ class MyRootScreen extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  TextFormField(),
-                  TextFormField(),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: TextFormField(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: TextFormField(),
+                  ),
+                  const SizedBox(height: 40),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       PostButton(
                         onTap: () {},
                         enable: true,
                         label: '新規登録',
                       ),
+                      const SizedBox(width: 40),
                       PostButton(
                         onTap: () {},
                         enable: true,
