@@ -17,9 +17,9 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 final GlobalKey<NavigatorState> _sectionANavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
