@@ -9,6 +9,8 @@ class SignUpScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
+    final emailTextEditingController = useTextEditingController();
+    final passwordTextEditingController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('新規登録/ログイン'),
@@ -21,6 +23,7 @@ class SignUpScreen extends HookWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextFormField(
+                  controller: emailTextEditingController,
                   decoration: const InputDecoration(
                     labelText: 'メールアドレス',
                   ),
@@ -38,6 +41,7 @@ class SignUpScreen extends HookWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextFormField(
+                  controller: passwordTextEditingController,
                   maxLength: 16,
                   decoration: const InputDecoration(
                     labelText: 'パスワード',
