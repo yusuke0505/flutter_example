@@ -73,20 +73,6 @@ class UserNotifier extends StateNotifier<UserState> {
     }
   }
 
-  Future<bool> deleteUser() async {
-    final user = state.user;
-    if (user == null) {
-      return false;
-    }
-    try {
-      await user.delete();
-      state = state.copyWith(user: null);
-      return true;
-    } on Exception {
-      return false;
-    }
-  }
-
   void changeName(String name) {
     state = state.copyWith(userItem: state.userItem.copyWith(name: name));
   }
