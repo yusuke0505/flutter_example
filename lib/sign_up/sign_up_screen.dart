@@ -90,9 +90,19 @@ class SignUpScreen extends HookConsumerWidget {
                   PostButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('ログインに成功しました')),
-                        );
+                        userNotifier
+                            .signIn(
+                          email: emailTextEditingController.text,
+                          password: passwordTextEditingController.text,
+                        )
+                            .then((value) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  Text(value ? 'ログインに成功しました' : 'ログインに失敗しました'),
+                            ),
+                          );
+                        });
                       }
                     },
                     enable: true,
