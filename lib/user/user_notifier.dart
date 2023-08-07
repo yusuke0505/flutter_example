@@ -28,12 +28,31 @@ class UserNotifier extends StateNotifier<UserState> {
     required String password,
   }) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
-      );
-      final user = credential.user;
+      ))
+          .user;
+      if (user == null) {
+        return false;
+      }
+      state = state.copyWith(user: user);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = (await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      ))
+          .user;
       if (user == null) {
         return false;
       }
