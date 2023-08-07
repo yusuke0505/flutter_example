@@ -15,30 +15,38 @@ class MyPageScreen extends HookConsumerWidget {
       appBar: AppBar(
         title: Text(label),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    userState.userItem.name,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      GoRouter.of(context).go('$myPagePath/$nameEditPath');
-                    },
-                    child: const Text('編集'),
-                  ),
-                ],
-              ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  userState.userItem.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                TextButton(
+                  onPressed: () {
+                    GoRouter.of(context).go('$myPagePath/$nameEditPath');
+                  },
+                  child: const Text('編集'),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextButton(
+              onPressed: () {
+                GoRouter.of(context).go('$myPagePath/$nameEditPath');
+              },
+              child: const Text('ログアウト'),
+            ),
+          ),
+        ],
       ),
     );
   }
