@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_example/data/user/user_item.dart';
+import 'package:flutter_example/data/user/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final userItemRepositoryProvider = Provider((_) => UserItemRepository());

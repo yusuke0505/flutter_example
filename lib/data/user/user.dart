@@ -2,7 +2,7 @@ import 'package:flutter_example/constants.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-part 'user_item.freezed.dart';
+part 'user.freezed.dart';
 
 @freezed
 class UserItem with _$UserItem {

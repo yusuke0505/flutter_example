@@ -1,4 +1,4 @@
-import 'package:flutter_example/data/user/user_item.dart';
+import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/firebase_auth_repository.dart';
 import 'package:flutter_example/repository/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
