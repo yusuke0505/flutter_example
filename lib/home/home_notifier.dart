@@ -1,4 +1,4 @@
-import 'package:flutter_example/data/user_item/user_item.dart';
+import 'package:flutter_example/data/user/user_item.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
