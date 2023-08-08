@@ -45,8 +45,16 @@ class NameEditScreen extends HookConsumerWidget {
                   label: '更新',
                   enable: state.name.isNotEmpty,
                   onTap: () {
-                    notifier.post();
-                    GoRouter.of(context).pop();
+                    notifier.post().then((value) {
+                      print('value: $value');
+                      if (value) {
+                        GoRouter.of(context).pop();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('更新に失敗しました')),
+                        );
+                      }
+                    });
                   },
                 ),
               ),

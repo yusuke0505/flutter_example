@@ -33,8 +33,8 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
     state = state.copyWith(name: name.trim());
   }
 
-  void post() {
-    _userNotifier.changeName(state.name);
+  Future<bool> post() async {
+    return _userNotifier.changeName(state.name);
   }
 
   final Ref _ref;
