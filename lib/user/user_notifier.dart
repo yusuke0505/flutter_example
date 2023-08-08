@@ -37,9 +37,21 @@ class UserNotifier extends StateNotifier<UserState> {
       if (user == null) {
         return false;
       }
-      state = state.copyWith(user: user);
+      final docRef = FirebaseFirestore.instance
+          .collection("users")
+          .doc(state.user!.uid)
+          .withConverter(
+            fromFirestore: UserItem.fromFirestore,
+            toFirestore: (user, _) => user.toFirestore(),
+          );
+      state = state.copyWith(
+        user: user,
+        userItem: state.userItem.copyWith(uid: user.uid),
+      );
+      await docRef.set(state.userItem);
       return true;
     } catch (e) {
+      // TODO(you):Authのデータ作成が成功してFireStoreのデータ作成が失敗した時の処理を考える
       return false;
     }
   }
@@ -89,7 +101,7 @@ class UserNotifier extends StateNotifier<UserState> {
   Future<void> changeName(String name) async {
     final docRef = FirebaseFirestore.instance
         .collection("users")
-        .doc(state.user!.uid)
+        .doc(state.userItem.uid)
         .withConverter(
           fromFirestore: UserItem.fromFirestore,
           toFirestore: (user, _) => user.toFirestore(),
