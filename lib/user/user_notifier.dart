@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_example/data/user_item/user_item.dart';
+import 'package:flutter_example/repository/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,13 +26,10 @@ class UserNotifier extends StateNotifier<UserState> {
     if (user == null) {
       return;
     }
-    final snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.uid)
-        .get();
+    final userItem = await _userItemRepository.fetch(user.uid);
     state = state.copyWith(
       user: user,
-      userItem: UserItem.fromFirestore(snapshot, null),
+      userItem: userItem,
     );
   }
 
@@ -115,4 +113,6 @@ class UserNotifier extends StateNotifier<UserState> {
   }
 
   final Ref _ref;
+  UserItemRepository get _userItemRepository =>
+      _ref.read(userItemRepositoryProvider);
 }
