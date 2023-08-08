@@ -25,6 +25,11 @@ class UserNotifier extends StateNotifier<UserState> {
       return;
     }
     final user = await _userItemRepository.fetch(authUser.uid);
+    if (user == null) {
+      /// FIXME FirebaseAuthには登録できてるけどFirestoreには登録できていない不整合状態
+      /// 対象のメールアドレスでは新規登録もログインもできない状態
+      return;
+    }
     state = state.copyWith(user: user);
   }
 
@@ -32,21 +37,22 @@ class UserNotifier extends StateNotifier<UserState> {
     required String email,
     required String password,
   }) async {
-    try {
-      final authUser =
-          await _firebaseAuthRepository.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (authUser == null) {
-        return false;
-      }
-      final user = User(uid: authUser.uid);
-      await _userItemRepository.create(user);
+    final authUser =
+        await _firebaseAuthRepository.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    if (authUser == null) {
+      return false;
+    }
+    final user = User(uid: authUser.uid);
+    final result = await _userItemRepository.create(user);
+    if (result) {
       state = state.copyWith(user: user);
       return true;
-    } catch (e) {
-      // TODO(you):Authのデータ作成が成功してFireStoreのデータ作成が失敗した時の処理を考える
+    } else {
+      /// FIXME FirebaseAuthには登録できてるけどFirestoreには登録できていない不整合状態
+      /// 対象のメールアドレスでは新規登録もログインもできない状態
       return false;
     }
   }
@@ -55,21 +61,21 @@ class UserNotifier extends StateNotifier<UserState> {
     required String email,
     required String password,
   }) async {
-    try {
-      final authUser = await _firebaseAuthRepository.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (authUser == null) {
-        return false;
-      }
-      final user = await _userItemRepository.fetch(authUser.uid);
-      state = state.copyWith(user: user);
-      return true;
-    } catch (e) {
-      // TODO(you):Authのデータ作成が成功してFireStoreのデータ作成が失敗した時の処理を考える
+    final authUser = await _firebaseAuthRepository.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    if (authUser == null) {
       return false;
     }
+    final user = await _userItemRepository.fetch(authUser.uid);
+    if (user == null) {
+      /// FIXME FirebaseAuthには登録できてるけどFirestoreには登録できていない不整合状態
+      /// 対象のメールアドレスでは新規登録もログインもできない状態
+      return false;
+    }
+    state = state.copyWith(user: user);
+    return true;
   }
 
   Future<bool> signOut() async {
@@ -82,10 +88,15 @@ class UserNotifier extends StateNotifier<UserState> {
     }
   }
 
-  Future<void> changeName(String name) async {
-    final user = state.user!;
-    state = state.copyWith(user: user.copyWith(name: name));
-    await _userItemRepository.update(user);
+  Future<bool> changeName(String name) async {
+    final user = state.user!.copyWith(name: name);
+    final result = await _userItemRepository.update(user);
+    if (result) {
+      state = state.copyWith(user: user);
+      return true;
+    } else {
+      return false;
+    }
   }
 
   final Ref _ref;

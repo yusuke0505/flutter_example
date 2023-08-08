@@ -8,26 +8,41 @@ class UserItemRepository {
   final _instance = FirebaseFirestore.instance;
   static const _collectionPath = 'users';
 
-  Future<User> fetch(String uid) async {
-    final snapshot = await _instance.collection(_collectionPath).doc(uid).get();
-    return User.fromFirestore(snapshot, null);
+  Future<User?> fetch(String uid) async {
+    try {
+      final snapshot =
+          await _instance.collection(_collectionPath).doc(uid).get();
+      return User.fromFirestore(snapshot, null);
+    } on Exception {
+      return null;
+    }
   }
 
-  Future<void> create(User item) async {
-    await _instance
-        .collection(_collectionPath)
-        .doc(item.uid)
-        .set(item.toFirestore());
+  Future<bool> create(User item) async {
+    try {
+      await _instance
+          .collection(_collectionPath)
+          .doc(item.uid)
+          .set(item.toFirestore());
+      return true;
+    } on Exception {
+      return false;
+    }
   }
 
-  Future<void> update(User item) async {
-    await _instance
-        .collection(_collectionPath)
-        .doc(item.uid)
-        .withConverter(
-          fromFirestore: User.fromFirestore,
-          toFirestore: (user, _) => user.toFirestore(),
-        )
-        .set(item);
+  Future<bool> update(User item) async {
+    try {
+      await _instance
+          .collection(_collectionPath)
+          .doc(item.uid)
+          .withConverter(
+            fromFirestore: User.fromFirestore,
+            toFirestore: (user, _) => user.toFirestore(),
+          )
+          .set(item);
+      return true;
+    } on Exception {
+      return false;
+    }
   }
 }
