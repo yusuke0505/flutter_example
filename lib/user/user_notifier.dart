@@ -1,44 +1,11 @@
 import 'package:flutter_example/data/user_item/user_item.dart';
+import 'package:flutter_example/repository/firebase_auth_repository.dart';
 import 'package:flutter_example/repository/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 part 'user_notifier.freezed.dart';
-
-final firebaseAuthRepositoryProvider =
-    Provider((_) => FirebaseAuthRepository());
-
-class FirebaseAuthRepository {
-  final _instance = FirebaseAuth.instance;
-  User? get currentUser => _instance.currentUser;
-
-  Future<User?> createUserWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    final credential = await _instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return credential.user;
-  }
-
-  Future<User?> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    final credential = await _instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return credential.user;
-  }
-
-  Future<void> signOut() async {
-    return _instance.signOut();
-  }
-}
 
 @freezed
 class UserState with _$UserState {
