@@ -45,8 +45,20 @@ class NameEditScreen extends HookConsumerWidget {
                   label: '更新',
                   enable: state.name.isNotEmpty,
                   onTap: () {
+                    showDialog(
+                      context: context,
+                      barrierColor: Colors.black.withOpacity(0.5),
+                      builder: (_) {
+                        return WillPopScope(
+                          onWillPop: () async => false,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      },
+                    );
                     notifier.post().then((value) {
-                      print('value: $value');
+                      Navigator.of(context).pop();
                       if (value) {
                         GoRouter.of(context).pop();
                       } else {
