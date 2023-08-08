@@ -47,10 +47,7 @@ class UserNotifier extends StateNotifier<UserState> {
         return false;
       }
       final userItem = UserItem(uid: user.uid);
-      await FirebaseFirestore.instance
-          .collection("users")
-          .doc(user.uid)
-          .set(userItem.toFirestore());
+      await _userItemRepository.create(userItem);
       state = state.copyWith(
         user: user,
         userItem: userItem,
@@ -75,13 +72,10 @@ class UserNotifier extends StateNotifier<UserState> {
       if (user == null) {
         return false;
       }
-      final snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
+      final userItem = await _userItemRepository.fetch(user.uid);
       state = state.copyWith(
         user: user,
-        userItem: UserItem.fromFirestore(snapshot, null),
+        userItem: userItem,
       );
       return true;
     } catch (e) {

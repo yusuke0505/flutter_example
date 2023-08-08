@@ -11,4 +11,11 @@ class UserItemRepository {
     final snapshot = await _instance.collection('users').doc(uid).get();
     return UserItem.fromFirestore(snapshot, null);
   }
+
+  Future<void> create(UserItem item) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(item.uid)
+        .set(item.toFirestore());
+  }
 }
