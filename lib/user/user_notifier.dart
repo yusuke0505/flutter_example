@@ -21,7 +21,18 @@ class UserNotifier extends StateNotifier<UserState> {
   UserNotifier(this._ref) : super(const UserState());
 
   Future<void> fetchUser() async {
-    state = state.copyWith(user: FirebaseAuth.instance.currentUser);
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return;
+    }
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+    state = state.copyWith(
+      user: user,
+      userItem: UserItem.fromFirestore(snapshot, null),
+    );
   }
 
   Future<bool> createUser({
@@ -69,18 +80,14 @@ class UserNotifier extends StateNotifier<UserState> {
       if (user == null) {
         return false;
       }
-      final docRef = FirebaseFirestore.instance
-          .collection("users")
-          .doc(state.user!.uid)
-          .withConverter(
-            fromFirestore: UserItem.fromFirestore,
-            toFirestore: (user, _) => user.toFirestore(),
-          );
+      final snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
       state = state.copyWith(
         user: user,
-        userItem: state.userItem.copyWith(uid: user.uid),
+        userItem: UserItem.fromFirestore(snapshot, null),
       );
-      await docRef.set(state.userItem);
       return true;
     } catch (e) {
       // TODO(you):Authのデータ作成が成功してFireStoreのデータ作成が失敗した時の処理を考える
