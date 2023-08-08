@@ -9,7 +9,7 @@ part 'user_notifier.freezed.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    UserItem? user,
+    User? user,
   }) = _UserState;
 }
 
@@ -41,7 +41,7 @@ class UserNotifier extends StateNotifier<UserState> {
       if (authUser == null) {
         return false;
       }
-      final user = UserItem(uid: authUser.uid);
+      final user = User(uid: authUser.uid);
       await _userItemRepository.create(user);
       state = state.copyWith(user: user);
       return true;

@@ -8,24 +8,24 @@ class UserItemRepository {
   final _instance = FirebaseFirestore.instance;
   static const _collectionPath = 'users';
 
-  Future<UserItem> fetch(String uid) async {
+  Future<User> fetch(String uid) async {
     final snapshot = await _instance.collection(_collectionPath).doc(uid).get();
-    return UserItem.fromFirestore(snapshot, null);
+    return User.fromFirestore(snapshot, null);
   }
 
-  Future<void> create(UserItem item) async {
+  Future<void> create(User item) async {
     await _instance
         .collection(_collectionPath)
         .doc(item.uid)
         .set(item.toFirestore());
   }
 
-  Future<void> update(UserItem item) async {
+  Future<void> update(User item) async {
     await _instance
         .collection(_collectionPath)
         .doc(item.uid)
         .withConverter(
-          fromFirestore: UserItem.fromFirestore,
+          fromFirestore: User.fromFirestore,
           toFirestore: (user, _) => user.toFirestore(),
         )
         .set(item);

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserState {
-  UserItem? get user => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserStateCopyWith<UserState> get copyWith =>
@@ -28,9 +28,9 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
-  $Res call({UserItem? user});
+  $Res call({User? user});
 
-  $UserItemCopyWith<$Res>? get user;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -52,18 +52,18 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserItem?,
+              as User?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserItemCopyWith<$Res>? get user {
+  $UserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $UserItemCopyWith<$Res>(_value.user!, (value) {
+    return $UserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -76,10 +76,10 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
       __$$_UserStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserItem? user});
+  $Res call({User? user});
 
   @override
-  $UserItemCopyWith<$Res>? get user;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -99,7 +99,7 @@ class __$$_UserStateCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserItem?,
+              as User?,
     ));
   }
 }
@@ -110,7 +110,7 @@ class _$_UserState implements _UserState {
   const _$_UserState({this.user});
 
   @override
-  final UserItem? user;
+  final User? user;
 
   @override
   String toString() {
@@ -136,10 +136,10 @@ class _$_UserState implements _UserState {
 }
 
 abstract class _UserState implements UserState {
-  const factory _UserState({final UserItem? user}) = _$_UserState;
+  const factory _UserState({final User? user}) = _$_UserState;
 
   @override
-  UserItem? get user;
+  User? get user;
   @override
   @JsonKey(ignore: true)
   _$$_UserStateCopyWith<_$_UserState> get copyWith =>

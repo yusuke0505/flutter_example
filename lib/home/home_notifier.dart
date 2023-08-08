@@ -20,7 +20,7 @@ class PostItem {
   });
 
   final String body;
-  final UserItem userItem;
+  final User userItem;
 }
 
 final homeNotifierProvider =
@@ -38,7 +38,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
         postItems: const [
           PostItem(
             body: 'body3',
-            userItem: UserItem(
+            userItem: User(
               uid: '',
               name: 'name3',
               imagePath: imagePath,
@@ -46,7 +46,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           ),
           PostItem(
             body: 'body2',
-            userItem: UserItem(
+            userItem: User(
               uid: '',
               name: 'name2',
               imagePath: imagePath,
@@ -54,7 +54,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           ),
           PostItem(
             body: 'body1',
-            userItem: UserItem(
+            userItem: User(
               uid: '',
               name: 'name1',
               imagePath: imagePath,
