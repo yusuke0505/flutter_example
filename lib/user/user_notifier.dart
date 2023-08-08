@@ -73,11 +73,11 @@ class UserNotifier extends StateNotifier<UserState> {
   }
 
   Future<bool> signOut() async {
-    try {
-      await _firebaseAuthRepository.signOut();
+    final result = await _firebaseAuthRepository.signOut();
+    if (result) {
       state = state.copyWith(user: null);
       return true;
-    } catch (e) {
+    } else {
       return false;
     }
   }

@@ -12,25 +12,38 @@ class FirebaseAuthRepository {
     required String email,
     required String password,
   }) async {
-    final credential = await _instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return credential.user;
+    try {
+      final credential = await _instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return credential.user;
+    } on Exception {
+      return null;
+    }
   }
 
   Future<User?> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    final credential = await _instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return credential.user;
+    try {
+      final credential = await _instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return credential.user;
+    } on Exception {
+      return null;
+    }
   }
 
-  Future<void> signOut() async {
-    return _instance.signOut();
+  Future<bool> signOut() async {
+    try {
+      await _instance.signOut();
+      return true;
+    } on Exception {
+      return false;
+    }
   }
 }
