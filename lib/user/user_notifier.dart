@@ -22,13 +22,13 @@ class UserNotifier extends StateNotifier<UserState> {
   UserNotifier(this._ref) : super(const UserState());
 
   Future<void> fetchUser() async {
-    final user = _firebaseAuthRepository.currentUser;
-    if (user == null) {
+    final authUser = _firebaseAuthRepository.currentUser;
+    if (authUser == null) {
       return;
     }
-    final userItem = await _userItemRepository.fetch(user.uid);
+    final userItem = await _userItemRepository.fetch(authUser.uid);
     state = state.copyWith(
-      user: user,
+      user: authUser,
       userItem: userItem,
     );
   }
@@ -38,17 +38,18 @@ class UserNotifier extends StateNotifier<UserState> {
     required String password,
   }) async {
     try {
-      final user = await _firebaseAuthRepository.createUserWithEmailAndPassword(
+      final authUser =
+          await _firebaseAuthRepository.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (user == null) {
+      if (authUser == null) {
         return false;
       }
-      final userItem = UserItem(uid: user.uid);
+      final userItem = UserItem(uid: authUser.uid);
       await _userItemRepository.create(userItem);
       state = state.copyWith(
-        user: user,
+        user: authUser,
         userItem: userItem,
       );
       return true;
@@ -63,16 +64,16 @@ class UserNotifier extends StateNotifier<UserState> {
     required String password,
   }) async {
     try {
-      final user = await _firebaseAuthRepository.signInWithEmailAndPassword(
+      final authUser = await _firebaseAuthRepository.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (user == null) {
+      if (authUser == null) {
         return false;
       }
-      final userItem = await _userItemRepository.fetch(user.uid);
+      final userItem = await _userItemRepository.fetch(authUser.uid);
       state = state.copyWith(
-        user: user,
+        user: authUser,
         userItem: userItem,
       );
       return true;
