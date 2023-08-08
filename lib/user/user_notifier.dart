@@ -9,7 +9,7 @@ part 'user_notifier.freezed.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    UserItem? userItem,
+    UserItem? user,
   }) = _UserState;
 }
 
@@ -24,8 +24,8 @@ class UserNotifier extends StateNotifier<UserState> {
     if (authUser == null) {
       return;
     }
-    final userItem = await _userItemRepository.fetch(authUser.uid);
-    state = state.copyWith(userItem: userItem);
+    final user = await _userItemRepository.fetch(authUser.uid);
+    state = state.copyWith(user: user);
   }
 
   Future<bool> createUser({
@@ -41,9 +41,9 @@ class UserNotifier extends StateNotifier<UserState> {
       if (authUser == null) {
         return false;
       }
-      final userItem = UserItem(uid: authUser.uid);
-      await _userItemRepository.create(userItem);
-      state = state.copyWith(userItem: userItem);
+      final user = UserItem(uid: authUser.uid);
+      await _userItemRepository.create(user);
+      state = state.copyWith(user: user);
       return true;
     } catch (e) {
       // TODO(you):Authのデータ作成が成功してFireStoreのデータ作成が失敗した時の処理を考える
@@ -63,8 +63,8 @@ class UserNotifier extends StateNotifier<UserState> {
       if (authUser == null) {
         return false;
       }
-      final userItem = await _userItemRepository.fetch(authUser.uid);
-      state = state.copyWith(userItem: userItem);
+      final user = await _userItemRepository.fetch(authUser.uid);
+      state = state.copyWith(user: user);
       return true;
     } catch (e) {
       // TODO(you):Authのデータ作成が成功してFireStoreのデータ作成が失敗した時の処理を考える
@@ -75,7 +75,7 @@ class UserNotifier extends StateNotifier<UserState> {
   Future<bool> signOut() async {
     try {
       await _firebaseAuthRepository.signOut();
-      state = state.copyWith(userItem: null);
+      state = state.copyWith(user: null);
       return true;
     } catch (e) {
       return false;
@@ -83,10 +83,9 @@ class UserNotifier extends StateNotifier<UserState> {
   }
 
   Future<void> changeName(String name) async {
-    assert(state.userItem != null);
-    final userItem = state.userItem!;
-    state = state.copyWith(userItem: userItem.copyWith(name: name));
-    await _userItemRepository.update(userItem);
+    final user = state.user!;
+    state = state.copyWith(user: user.copyWith(name: name));
+    await _userItemRepository.update(user);
   }
 
   final Ref _ref;

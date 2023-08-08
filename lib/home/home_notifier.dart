@@ -71,13 +71,11 @@ class HomeNotifier extends StateNotifier<HomeState> {
   }
 
   Future<void> post(String body) async {
-    assert(_userState.userItem != null);
-    final userItem = _userState.userItem!;
     state = state.copyWith(
       postItems: [
         PostItem(
           body: body,
-          userItem: userItem,
+          userItem: _userState.user!,
         ),
         ...state.postItems,
       ],

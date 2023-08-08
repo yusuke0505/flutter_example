@@ -21,12 +21,10 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
   NameEditNotifier(this._ref) : super(const NameEditState());
 
   Future<void> fetch() async {
-    assert(_userState.userItem != null);
-    final userItem = _userState.userItem!;
     Future.delayed(const Duration(seconds: 1)).then(
       (_) => state = state.copyWith(
         loading: false,
-        name: userItem.name,
+        name: _userState.user!.name,
       ),
     );
   }

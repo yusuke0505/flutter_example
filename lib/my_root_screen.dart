@@ -41,7 +41,7 @@ class MyRootScreen extends HookConsumerWidget {
       '$myPagePath/$nameEditPath',
     ];
     final showNavBar = !notShowNabVarPaths.contains(goRouterState.uri.path);
-    return userState.userItem != null
+    return userState.user != null
         ? Scaffold(
             body: navigationShell,
             bottomNavigationBar: showNavBar
