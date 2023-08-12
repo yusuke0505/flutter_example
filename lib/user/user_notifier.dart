@@ -4,9 +4,10 @@ import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/firebase_auth_repository.dart';
 import 'package:flutter_example/repository/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_notifier.freezed.dart';
+part 'user_notifier.g.dart';
 
 @freezed
 class UserState with _$UserState {
@@ -15,10 +16,8 @@ class UserState with _$UserState {
   }) = _UserState;
 }
 
-final userNotifierProvider =
-    AsyncNotifierProvider<UserNotifier, UserState>(UserNotifier.new);
-
-class UserNotifier extends AsyncNotifier<UserState> {
+@Riverpod(keepAlive: true)
+class UserNotifier extends _$UserNotifier {
   @override
   FutureOr<UserState> build() async {
     final user = await fetchUser();
