@@ -24,10 +24,13 @@ class PostItem {
 }
 
 final homeNotifierProvider =
-    StateNotifierProvider<HomeNotifier, HomeState>((ref) => HomeNotifier(ref));
+    NotifierProvider<HomeNotifier, HomeState>(HomeNotifier.new);
 
-class HomeNotifier extends StateNotifier<HomeState> {
-  HomeNotifier(this._ref) : super(const HomeState());
+class HomeNotifier extends Notifier<HomeState> {
+  @override
+  HomeState build() {
+    return const HomeState();
+  }
 
   Future<void> fetch() async {
     const imagePath =
@@ -82,6 +85,5 @@ class HomeNotifier extends StateNotifier<HomeState> {
     );
   }
 
-  final Ref _ref;
-  UserState get _userState => _ref.read(userNotifierProvider);
+  UserState get _userState => ref.read(userNotifierProvider);
 }
