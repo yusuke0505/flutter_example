@@ -16,14 +16,18 @@ class HomeScreen extends HookConsumerWidget {
       notifier.fetch();
       return null;
     }, const []);
-    final body = state.loading
-        ? const Center(child: CircularProgressIndicator())
-        : RefreshIndicator(
-            onRefresh: notifier.refresh,
-            child: ListView(
-              children: state.postItems.map((e) => _Tile(item: e)).toList(),
-            ),
-          );
+    final body = state.when(
+      data: (data) {
+        return RefreshIndicator(
+          onRefresh: notifier.refresh,
+          child: ListView(
+            children: data.postItems.map((e) => _Tile(item: e)).toList(),
+          ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (_, __) => const Center(child: CircularProgressIndicator()),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(TabItem.home.label),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,64 +26,67 @@ class PostItem {
 }
 
 final homeNotifierProvider =
-    NotifierProvider<HomeNotifier, HomeState>(HomeNotifier.new);
+    AsyncNotifierProvider<HomeNotifier, HomeState>(HomeNotifier.new);
 
-class HomeNotifier extends Notifier<HomeState> {
+class HomeNotifier extends AsyncNotifier<HomeState> {
   @override
-  HomeState build() {
-    return const HomeState();
+  FutureOr<HomeState> build() async {
+    final items = await fetch();
+    return HomeState(postItems: items);
   }
 
-  Future<void> fetch() async {
+  Future<List<PostItem>> fetch() async {
     const imagePath =
         'https://www.barrel365.com/wp-content/uploads/2019/12/livet-1.jpg';
-    Future.delayed(const Duration(seconds: 1)).then(
-      (_) => state = state.copyWith(
-        loading: false,
-        postItems: const [
-          PostItem(
-            body: 'body3',
-            userItem: User(
-              uid: '',
-              name: 'name3',
-              imagePath: imagePath,
-            ),
-          ),
-          PostItem(
-            body: 'body2',
-            userItem: User(
-              uid: '',
-              name: 'name2',
-              imagePath: imagePath,
-            ),
-          ),
-          PostItem(
-            body: 'body1',
-            userItem: User(
-              uid: '',
-              name: 'name1',
-              imagePath: imagePath,
-            ),
-          ),
-        ],
+    await Future.delayed(const Duration(seconds: 1));
+    return const [
+      PostItem(
+        body: 'body3',
+        userItem: User(
+          uid: '',
+          name: 'name3',
+          imagePath: imagePath,
+        ),
       ),
-    );
+      PostItem(
+        body: 'body2',
+        userItem: User(
+          uid: '',
+          name: 'name2',
+          imagePath: imagePath,
+        ),
+      ),
+      PostItem(
+        body: 'body1',
+        userItem: User(
+          uid: '',
+          name: 'name1',
+          imagePath: imagePath,
+        ),
+      ),
+    ];
   }
 
   Future<void> refresh() async {
-    state = state.copyWith(loading: true);
-    fetch();
+    state = const AsyncValue.loading();
+    final items = await fetch();
+    state = AsyncValue.data(
+      state.value!.copyWith(postItems: items),
+    );
   }
 
   Future<void> post(String body) async {
-    state = state.copyWith(
-      postItems: [
-        PostItem(
-          body: body,
-          userItem: _userState.user!,
-        ),
-        ...state.postItems,
-      ],
+    final value = state.value!;
+    state = AsyncValue.data(
+      value.copyWith(
+        postItems: [
+          PostItem(
+            body: body,
+            userItem: _userState.user!,
+          ),
+          ...value.postItems,
+        ],
+      ),
     );
   }
 
