@@ -13,9 +13,9 @@ analyzer:
   plugins:
     - custom_lint
 
-custom-lint:
+custom_lint:
   rules:
-    - manual_providers_as_generated_provider_dependency: false
+    - avoid_manual_providers_as_generated_provider_dependency: false
 
 linter:
   # The lint rules applied to this project can be customized in the
