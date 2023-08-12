@@ -15,10 +15,13 @@ class UserState with _$UserState {
 }
 
 final userNotifierProvider =
-    StateNotifierProvider<UserNotifier, UserState>((ref) => UserNotifier(ref));
+    NotifierProvider<UserNotifier, UserState>(UserNotifier.new);
 
-class UserNotifier extends StateNotifier<UserState> {
-  UserNotifier(this._ref) : super(const UserState());
+class UserNotifier extends Notifier<UserState> {
+  @override
+  UserState build() {
+    return const UserState();
+  }
 
   Future<void> fetchUser() async {
     final authUser = _firebaseAuthRepository.currentUser;
@@ -102,9 +105,8 @@ class UserNotifier extends StateNotifier<UserState> {
     }
   }
 
-  final Ref _ref;
   UserItemRepository get _userItemRepository =>
-      _ref.read(userItemRepositoryProvider);
+      ref.read(userItemRepositoryProvider);
   FirebaseAuthRepository get _firebaseAuthRepository =>
-      _ref.read(firebaseAuthRepositoryProvider);
+      ref.read(firebaseAuthRepositoryProvider);
 }
