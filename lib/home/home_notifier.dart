@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_notifier.freezed.dart';
+part 'home_notifier.g.dart';
 
 @freezed
 class HomeState with _$HomeState {
@@ -24,10 +25,8 @@ class PostItem {
   final User userItem;
 }
 
-final homeNotifierProvider =
-    AsyncNotifierProvider<HomeNotifier, HomeState>(HomeNotifier.new);
-
-class HomeNotifier extends AsyncNotifier<HomeState> {
+@Riverpod(keepAlive: false)
+class HomeNotifier extends _$HomeNotifier {
   @override
   FutureOr<HomeState> build() async {
     final items = await fetch();
