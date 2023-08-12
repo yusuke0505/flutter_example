@@ -11,15 +11,15 @@ class WriteState with _$WriteState {
 }
 
 final writeNotifierProvider =
-    StateNotifierProvider.autoDispose<WriteNotifier, WriteState>(
-        (ref) => WriteNotifier(ref));
+    AutoDisposeNotifierProvider<WriteNotifier, WriteState>(WriteNotifier.new);
 
-class WriteNotifier extends StateNotifier<WriteState> {
-  WriteNotifier(this._ref) : super(const WriteState());
+class WriteNotifier extends AutoDisposeNotifier<WriteState> {
+  @override
+  WriteState build() {
+    return const WriteState();
+  }
 
   void onTextChanged(String text) {
     state = state.copyWith(text: text.trim());
   }
-
-  final Ref _ref;
 }
