@@ -29,6 +29,6 @@ class NameEditNotifier extends AutoDisposeNotifier<NameEditState> {
     return _userNotifier.changeName(state.name);
   }
 
-  UserState get _userState => ref.read(userNotifierProvider);
+  UserState get _userState => ref.read(userNotifierProvider).value!;
   UserNotifier get _userNotifier => ref.read(userNotifierProvider.notifier);
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/firebase_auth_repository.dart';
 import 'package:flutter_example/repository/user_item_repository.dart';
@@ -15,28 +17,27 @@ class UserState with _$UserState {
 }
 
 final userNotifierProvider =
-    NotifierProvider<UserNotifier, UserState>(UserNotifier.new);
+    AsyncNotifierProvider<UserNotifier, UserState>(UserNotifier.new);
 
-class UserNotifier extends Notifier<UserState> {
+class UserNotifier extends AsyncNotifier<UserState> {
   @override
-  UserState build() {
-    return const UserState();
+  FutureOr<UserState> build() async {
+    final user = await fetchUser();
+    return UserState(user: user);
   }
 
-  Future<void> fetchUser() async {
+  Future<User?> fetchUser() async {
     final authUser = _firebaseAuthRepository.currentUser;
     if (authUser == null) {
-      state = state.copyWith(isLoading: false);
-      return;
+      return null;
     }
     final user = await _userItemRepository.fetch(authUser.uid);
-    state = state.copyWith(isLoading: false);
     if (user == null) {
       /// FIXME FirebaseAuthには登録できてるけどFirestoreには登録できていない不整合状態
       /// 対象のメールアドレスでは新規登録もログインもできない状態
-      return;
+      return null;
     }
-    state = state.copyWith(user: user);
+    return user;
   }
 
   Future<bool> createUser({
@@ -54,7 +55,9 @@ class UserNotifier extends Notifier<UserState> {
     final user = User(uid: authUser.uid);
     final result = await _userItemRepository.create(user);
     if (result) {
-      state = state.copyWith(user: user);
+      state = AsyncValue.data(
+        state.value!.copyWith(user: user),
+      );
       return true;
     } else {
       /// FIXME FirebaseAuthには登録できてるけどFirestoreには登録できていない不整合状態
@@ -80,14 +83,16 @@ class UserNotifier extends Notifier<UserState> {
       /// 対象のメールアドレスでは新規登録もログインもできない状態
       return false;
     }
-    state = state.copyWith(user: user);
+    state = AsyncValue.data(
+      state.value!.copyWith(user: user),
+    );
     return true;
   }
 
   Future<bool> signOut() async {
     final result = await _firebaseAuthRepository.signOut();
     if (result) {
-      state = state.copyWith(user: null);
+      state = AsyncValue.data(state.value!.copyWith(user: null));
       return true;
     } else {
       return false;
@@ -95,10 +100,13 @@ class UserNotifier extends Notifier<UserState> {
   }
 
   Future<bool> changeName(String name) async {
-    final user = state.user!.copyWith(name: name);
+    final value = state.value!;
+    final user = value.user!.copyWith(name: name);
     final result = await _userItemRepository.update(user);
     if (result) {
-      state = state.copyWith(user: user);
+      state = AsyncValue.data(
+        value.copyWith(user: user),
+      );
       return true;
     } else {
       return false;

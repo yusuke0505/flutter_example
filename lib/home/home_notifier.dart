@@ -89,5 +89,5 @@ class HomeNotifier extends AsyncNotifier<HomeState> {
     );
   }
 
-  UserState get _userState => ref.read(userNotifierProvider);
+  UserState get _userState => ref.read(userNotifierProvider).value!;
 }
