@@ -6,12 +6,12 @@ part of 'home_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homeNotifierHash() => r'2845129557d065d4fd41a7ef31efc991443ac53b';
+String _$homeNotifierHash() => r'3383e330d1f6dff7b3429eac2f9ad0909377d31a';
 
 /// See also [HomeNotifier].
 @ProviderFor(HomeNotifier)
 final homeNotifierProvider =
-    AsyncNotifierProvider<HomeNotifier, HomeState>.internal(
+    AutoDisposeAsyncNotifierProvider<HomeNotifier, HomeState>.internal(
   HomeNotifier.new,
   name: r'homeNotifierProvider',
   debugGetCreateSourceHash:
@@ -20,6 +20,6 @@ final homeNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$HomeNotifier = AsyncNotifier<HomeState>;
+typedef _$HomeNotifier = AutoDisposeAsyncNotifier<HomeState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

@@ -25,7 +25,7 @@ class PostItem {
   final User userItem;
 }
 
-@Riverpod(keepAlive: true)
+@riverpod
 class HomeNotifier extends _$HomeNotifier {
   @override
   FutureOr<HomeState> build() async {
