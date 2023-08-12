@@ -11,7 +11,6 @@ part 'user_notifier.freezed.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
-    @Default(true) bool isLoading,
     User? user,
   }) = _UserState;
 }

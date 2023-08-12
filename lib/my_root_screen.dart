@@ -28,7 +28,6 @@ class MyRootScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(userNotifierProvider);
-    final userNotifier = ref.watch(userNotifierProvider.notifier);
     const notShowNabVarPaths = [
       '$homePath/$writePath',
       '$myPagePath/$nameEditPath',
