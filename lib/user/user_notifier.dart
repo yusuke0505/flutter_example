@@ -9,6 +9,7 @@ part 'user_notifier.freezed.dart';
 @freezed
 class UserState with _$UserState {
   const factory UserState({
+    @Default(true) bool isLoading,
     User? user,
   }) = _UserState;
 }
@@ -22,9 +23,11 @@ class UserNotifier extends StateNotifier<UserState> {
   Future<void> fetchUser() async {
     final authUser = _firebaseAuthRepository.currentUser;
     if (authUser == null) {
+      state = state.copyWith(isLoading: false);
       return;
     }
     final user = await _userItemRepository.fetch(authUser.uid);
+    state = state.copyWith(isLoading: false);
     if (user == null) {
       /// FIXME FirebaseAuthには登録できてるけどFirestoreには登録できていない不整合状態
       /// 対象のメールアドレスでは新規登録もログインもできない状態

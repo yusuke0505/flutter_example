@@ -36,6 +36,11 @@ class MyRootScreen extends HookConsumerWidget {
       });
       return null;
     }, const []);
+    if (userState.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     const notShowNabVarPaths = [
       '$homePath/$writePath',
       '$myPagePath/$nameEditPath',
