@@ -1,4 +1,3 @@
-import 'package:flutter_example/constants.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,8 +7,7 @@ part 'name_edit_notifier.freezed.dart';
 @freezed
 class NameEditState with _$NameEditState {
   const factory NameEditState({
-    @Default(true) bool loading,
-    @Default(defaultName) String name,
+    required String name,
   }) = _NameEditState;
 }
 
@@ -20,16 +18,7 @@ final nameEditNotifierProvider =
 class NameEditNotifier extends AutoDisposeNotifier<NameEditState> {
   @override
   NameEditState build() {
-    return const NameEditState();
-  }
-
-  Future<void> fetch() async {
-    Future.delayed(const Duration(seconds: 1)).then(
-      (_) => state = state.copyWith(
-        loading: false,
-        name: _userState.user!.name,
-      ),
-    );
+    return NameEditState(name: _userState.user!.name);
   }
 
   void onNameChanged(String name) {

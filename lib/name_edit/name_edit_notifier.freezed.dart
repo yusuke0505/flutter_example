@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NameEditState {
-  bool get loading => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +29,7 @@ abstract class $NameEditStateCopyWith<$Res> {
           NameEditState value, $Res Function(NameEditState) then) =
       _$NameEditStateCopyWithImpl<$Res, NameEditState>;
   @useResult
-  $Res call({bool loading, String name});
+  $Res call({String name});
 }
 
 /// @nodoc
@@ -46,14 +45,9 @@ class _$NameEditStateCopyWithImpl<$Res, $Val extends NameEditState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loading = null,
     Object? name = null,
   }) {
     return _then(_value.copyWith(
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -70,7 +64,7 @@ abstract class _$$_NameEditStateCopyWith<$Res>
       __$$_NameEditStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool loading, String name});
+  $Res call({String name});
 }
 
 /// @nodoc
@@ -84,14 +78,9 @@ class __$$_NameEditStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loading = null,
     Object? name = null,
   }) {
     return _then(_$_NameEditState(
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -103,18 +92,14 @@ class __$$_NameEditStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NameEditState implements _NameEditState {
-  const _$_NameEditState({this.loading = true, this.name = defaultName});
+  const _$_NameEditState({required this.name});
 
   @override
-  @JsonKey()
-  final bool loading;
-  @override
-  @JsonKey()
   final String name;
 
   @override
   String toString() {
-    return 'NameEditState(loading: $loading, name: $name)';
+    return 'NameEditState(name: $name)';
   }
 
   @override
@@ -122,12 +107,11 @@ class _$_NameEditState implements _NameEditState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NameEditState &&
-            (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loading, name);
+  int get hashCode => Object.hash(runtimeType, name);
 
   @JsonKey(ignore: true)
   @override
@@ -137,11 +121,8 @@ class _$_NameEditState implements _NameEditState {
 }
 
 abstract class _NameEditState implements NameEditState {
-  const factory _NameEditState({final bool loading, final String name}) =
-      _$_NameEditState;
+  const factory _NameEditState({required final String name}) = _$_NameEditState;
 
-  @override
-  bool get loading;
   @override
   String get name;
   @override

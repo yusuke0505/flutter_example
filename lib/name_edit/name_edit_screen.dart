@@ -13,55 +13,43 @@ class NameEditScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(nameEditNotifierProvider);
     final notifier = ref.watch(nameEditNotifierProvider.notifier);
-    final textEditingController = useTextEditingController();
-    useEffect(() {
-      notifier.fetch();
-      return null;
-    }, const []);
-    useEffect(() {
-      if (!state.loading) {
-        textEditingController.text = state.name;
-      }
-      return null;
-    }, [state.loading]);
-    final body = state.loading
-        ? const Center(child: CircularProgressIndicator())
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextFormField(
-                  controller: textEditingController,
-                  autofocus: true,
-                  maxLength: 10,
-                  onChanged: (val) {
-                    notifier.onNameChanged(val);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: PostButton(
-                  label: '更新',
-                  enable: state.name.isNotEmpty,
-                  onTap: () {
-                    showCircularProgressIndicatorDialog(context);
-                    notifier.post().then((value) {
-                      Navigator.of(context).pop();
-                      if (value) {
-                        GoRouter.of(context).pop();
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('更新に失敗しました')),
-                        );
-                      }
-                    });
-                  },
-                ),
-              ),
-            ],
-          );
+    final textEditingController = useTextEditingController(text: state.name);
+    final body = Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: TextFormField(
+            controller: textEditingController,
+            autofocus: true,
+            maxLength: 10,
+            onChanged: (val) {
+              notifier.onNameChanged(val);
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: PostButton(
+            label: '更新',
+            enable: state.name.isNotEmpty,
+            onTap: () {
+              showCircularProgressIndicatorDialog(context);
+              notifier.post().then((value) {
+                Navigator.of(context).pop();
+                if (value) {
+                  GoRouter.of(context).pop();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('更新に失敗しました')),
+                  );
+                }
+              });
+            },
+          ),
+        ),
+      ],
+    );
     return WillPopScope(
       onWillPop: () async => true,
       child: Scaffold(
