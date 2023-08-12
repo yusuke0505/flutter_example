@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'write_notifier.freezed.dart';
+part 'write_notifier.g.dart';
 
 @freezed
 class WriteState with _$WriteState {
@@ -10,10 +11,8 @@ class WriteState with _$WriteState {
   }) = _WriteState;
 }
 
-final writeNotifierProvider =
-    AutoDisposeNotifierProvider<WriteNotifier, WriteState>(WriteNotifier.new);
-
-class WriteNotifier extends AutoDisposeNotifier<WriteState> {
+@riverpod
+class WriteNotifier extends _$WriteNotifier {
   @override
   WriteState build() {
     return const WriteState();
