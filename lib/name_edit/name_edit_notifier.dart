@@ -1,8 +1,9 @@
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'name_edit_notifier.freezed.dart';
+part 'name_edit_notifier.g.dart';
 
 @freezed
 class NameEditState with _$NameEditState {
@@ -11,11 +12,8 @@ class NameEditState with _$NameEditState {
   }) = _NameEditState;
 }
 
-final nameEditNotifierProvider =
-    AutoDisposeNotifierProvider<NameEditNotifier, NameEditState>(
-        NameEditNotifier.new);
-
-class NameEditNotifier extends AutoDisposeNotifier<NameEditState> {
+@riverpod
+class NameEditNotifier extends _$NameEditNotifier {
   @override
   NameEditState build() {
     return NameEditState(name: _userState.user!.name);
