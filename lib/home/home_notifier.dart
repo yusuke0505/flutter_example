@@ -10,8 +10,7 @@ part 'home_notifier.freezed.dart';
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState({
-    @Default(true) bool loading,
-    @Default(<PostItem>[]) List<PostItem> postItems,
+    required List<PostItem> postItems,
   }) = _HomeState;
 }
 
