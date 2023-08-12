@@ -14,11 +14,14 @@ class NameEditState with _$NameEditState {
 }
 
 final nameEditNotifierProvider =
-    StateNotifierProvider.autoDispose<NameEditNotifier, NameEditState>(
-        (ref) => NameEditNotifier(ref));
+    AutoDisposeNotifierProvider<NameEditNotifier, NameEditState>(
+        NameEditNotifier.new);
 
-class NameEditNotifier extends StateNotifier<NameEditState> {
-  NameEditNotifier(this._ref) : super(const NameEditState());
+class NameEditNotifier extends AutoDisposeNotifier<NameEditState> {
+  @override
+  NameEditState build() {
+    return const NameEditState();
+  }
 
   Future<void> fetch() async {
     Future.delayed(const Duration(seconds: 1)).then(
@@ -37,7 +40,6 @@ class NameEditNotifier extends StateNotifier<NameEditState> {
     return _userNotifier.changeName(state.name);
   }
 
-  final Ref _ref;
-  UserState get _userState => _ref.read(userNotifierProvider);
-  UserNotifier get _userNotifier => _ref.read(userNotifierProvider.notifier);
+  UserState get _userState => ref.read(userNotifierProvider);
+  UserNotifier get _userNotifier => ref.read(userNotifierProvider.notifier);
 }
