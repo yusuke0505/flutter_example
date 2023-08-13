@@ -47,5 +47,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>写真ライブラリにアクセスして、お気に入りの写真をアプリ内で使用します。</string>
+    <key>NSCameraUsageDescription</key>
+    <string>このアプリでは、新しい写真を撮影するためにカメラへのアクセスが必要です。</string>
 </dict>
 </plist>
