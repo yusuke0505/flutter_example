@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/firebase_auth_repository.dart';
 import 'package:flutter_example/repository/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_notifier.freezed.dart';
@@ -109,6 +112,13 @@ class UserNotifier extends _$UserNotifier {
     } else {
       return false;
     }
+  }
+
+  Future<void> updateProfile(XFile image) async {
+    final uid = state.value!.user!.uid;
+    final storageRef =
+        FirebaseStorage.instance.ref().child('users/$uid/profile.png');
+    await storageRef.putFile(File(image.path));
   }
 
   UserItemRepository get _userItemRepository =>
