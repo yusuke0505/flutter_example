@@ -12,6 +12,7 @@ class MyPageScreen extends HookConsumerWidget {
     final userState = ref.watch(userNotifierProvider);
     final userNotifier = ref.watch(userNotifierProvider.notifier);
     final label = TabItem.myPage.label;
+    const imageSize = 80.0;
     return Scaffold(
       appBar: AppBar(
         title: Text(label),
@@ -20,6 +21,26 @@ class MyPageScreen extends HookConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(imageSize / 2),
+              child: Image.network(
+                userState.value!.user!.imagePath ?? '',
+                width: imageSize,
+                height: imageSize,
+                errorBuilder: (_, __, ___) {
+                  return Container(
+                    width: imageSize,
+                    height: imageSize,
+                    color: Colors.grey,
+                  );
+                },
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
@@ -38,6 +59,7 @@ class MyPageScreen extends HookConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextButton(
@@ -53,6 +75,7 @@ class MyPageScreen extends HookConsumerWidget {
               child: const Text('ログアウト'),
             ),
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );
