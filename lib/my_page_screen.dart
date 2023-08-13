@@ -3,6 +3,7 @@ import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyPageScreen extends HookConsumerWidget {
   const MyPageScreen({super.key});
@@ -24,19 +25,28 @@ class MyPageScreen extends HookConsumerWidget {
           const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(imageSize / 2),
-              child: Image.network(
-                userState.value!.user!.imagePath ?? '',
-                width: imageSize,
-                height: imageSize,
-                errorBuilder: (_, __, ___) {
-                  return Container(
-                    width: imageSize,
-                    height: imageSize,
-                    color: Colors.grey,
-                  );
-                },
+            child: GestureDetector(
+              onTap: () async {
+                final image =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
+                if (image == null) {
+                  return;
+                }
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(imageSize / 2),
+                child: Image.network(
+                  userState.value!.user!.imagePath ?? '',
+                  width: imageSize,
+                  height: imageSize,
+                  errorBuilder: (_, __, ___) {
+                    return Container(
+                      width: imageSize,
+                      height: imageSize,
+                      color: Colors.grey,
+                    );
+                  },
+                ),
               ),
             ),
           ),
