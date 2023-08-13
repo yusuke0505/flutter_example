@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_example/user/user_notifier.dart';
@@ -32,6 +35,10 @@ class MyPageScreen extends HookConsumerWidget {
                 if (image == null) {
                   return;
                 }
+                final storageRef = FirebaseStorage.instance
+                    .ref()
+                    .child('users/${userState.value!.user!.uid}/profile.png');
+                await storageRef.putFile(File(image.path));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(imageSize / 2),
