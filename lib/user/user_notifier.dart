@@ -53,7 +53,8 @@ class UserNotifier extends _$UserNotifier {
     if (authUser == null) {
       return false;
     }
-    final user = User(uid: authUser.uid);
+    final uid = authUser.uid;
+    final user = User.generate(uid: uid);
     final result = await _userItemRepository.create(user);
     if (result) {
       state = AsyncValue.data(
@@ -115,9 +116,9 @@ class UserNotifier extends _$UserNotifier {
   }
 
   Future<void> updateProfile(XFile image) async {
-    final uid = state.value!.user!.uid;
+    final user = state.value!.user!;
     final storageRef =
-        FirebaseStorage.instance.ref().child('users/$uid/profile.png');
+        FirebaseStorage.instance.ref().child(user.storageImagePath);
     await storageRef.putFile(File(image.path));
   }
 

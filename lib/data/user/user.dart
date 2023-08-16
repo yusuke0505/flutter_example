@@ -32,4 +32,15 @@ class User with _$User {
       "image_path": imagePath,
     };
   }
+
+  factory User.generate({required String uid}) {
+    return User(
+      uid: uid,
+      imagePath: _storageImagePath(uid),
+    );
+  }
+
+  String get storageImagePath => _storageImagePath(uid);
+
+  static String _storageImagePath(String uid) => 'users/$uid/profile.png';
 }
