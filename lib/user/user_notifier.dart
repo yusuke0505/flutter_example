@@ -100,7 +100,7 @@ class UserNotifier extends _$UserNotifier {
     }
   }
 
-  Future<bool> changeName(String name) async {
+  Future<bool> updateName(String name) async {
     final value = state.value!;
     final user = value.user!.copyWith(name: name);
     final result = await _userItemRepository.update(user);

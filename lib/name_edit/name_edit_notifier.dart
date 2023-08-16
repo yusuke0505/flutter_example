@@ -24,7 +24,7 @@ class NameEditNotifier extends _$NameEditNotifier {
   }
 
   Future<bool> post() async {
-    return _userNotifier.changeName(state.name);
+    return _userNotifier.updateName(state.name);
   }
 
   UserState get _userState => ref.read(userNotifierProvider).value!;
