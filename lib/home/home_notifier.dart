@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_example/data/post_item_for_view/post_item_for_view.dart';
+import 'package:flutter_example/repository/firestore/favorite_repository.dart';
 import 'package:flutter_example/repository/firestore/post_item_repository.dart';
 import 'package:flutter_example/repository/firestore/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -83,4 +84,6 @@ class HomeNotifier extends _$HomeNotifier {
       ref.watch(postItemRepositoryProvider);
   UserItemRepository get _userItemRepository =>
       ref.watch(userItemRepositoryProvider);
+  FavoriteRepository get _favoriteRepository =>
+      ref.watch(favoriteRepositoryProvider);
 }
