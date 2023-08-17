@@ -1,11 +1,12 @@
 import 'package:flutter_example/data/user/user.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class PostItemForView {
-  const PostItemForView({
-    required this.body,
-    required this.userItem,
-  });
+part 'post_item_for_view.freezed.dart';
 
-  final String body;
-  final User userItem;
+@freezed
+class PostItemForView with _$PostItemForView {
+  const factory PostItemForView({
+    required String body,
+    required User userItem,
+  }) = _PostItemForView;
 }
