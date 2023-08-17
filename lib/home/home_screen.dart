@@ -18,7 +18,14 @@ class HomeScreen extends HookConsumerWidget {
         return RefreshIndicator(
           onRefresh: notifier.refresh,
           child: ListView(
-            children: data.postItems.map((e) => _Tile(item: e)).toList(),
+            children: data.postItems
+                .map(
+                  (e) => _Tile(
+                    item: e,
+                    toggleFavorite: () => notifier.toggleFavorite(e),
+                  ),
+                )
+                .toList(),
           ),
         );
       },
@@ -40,9 +47,13 @@ class HomeScreen extends HookConsumerWidget {
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.item});
+  const _Tile({
+    required this.item,
+    required this.toggleFavorite,
+  });
 
   final PostItemForView item;
+  final bool Function() toggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +82,7 @@ class _Tile extends StatelessWidget {
       subtitle: Text(item.body),
       trailing: _FavoriteButton(
         isFavorited: item.isFavorited,
-        onTap: () {
-          return true;
-        },
+        onTap: toggleFavorite,
       ),
     );
   }

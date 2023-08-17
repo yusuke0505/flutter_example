@@ -66,6 +66,18 @@ class HomeNotifier extends _$HomeNotifier {
     );
   }
 
+  bool toggleFavorite(PostItemForView item) {
+    state = AsyncValue.data(
+      state.value!.copyWith(
+        postItems: state.value!.postItems
+            .map((e) =>
+                e == item ? item.copyWith(isFavorited: !item.isFavorited) : e)
+            .toList(),
+      ),
+    );
+    return true;
+  }
+
   PostItemRepository get _postItemRepository =>
       ref.watch(postItemRepositoryProvider);
   UserItemRepository get _userItemRepository =>
