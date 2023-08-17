@@ -7,13 +7,18 @@ final firebaseStorageRepositoryProvider =
     Provider((_) => FirebaseStorageRepository());
 
 class FirebaseStorageRepository {
-  Future<String> updateProfile({
+  final _instance = FirebaseStorage.instance;
+
+  Future<String?> updateProfile({
     required File file,
     required String uid,
   }) async {
-    final storageRef =
-        FirebaseStorage.instance.ref().child('users/$uid/profile.png');
-    await storageRef.putFile(file);
-    return await storageRef.getDownloadURL();
+    try {
+      final storageRef = _instance.ref().child('users/$uid/profile.png');
+      await storageRef.putFile(file);
+      return await storageRef.getDownloadURL();
+    } on Exception {
+      return null;
+    }
   }
 }

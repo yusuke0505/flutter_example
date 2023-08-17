@@ -114,16 +114,20 @@ class UserNotifier extends _$UserNotifier {
     }
   }
 
-  Future<void> updateProfile(XFile image) async {
+  Future<bool> updateProfile(XFile image) async {
     final value = state.value!;
     final user = value.user!;
     final imagePath = await _firebaseStorageRepository.updateProfile(
       file: File(image.path),
       uid: user.uid,
     );
+    if (imagePath == null) {
+      return false;
+    }
     state = AsyncValue.data(
       value.copyWith(user: user.copyWith(imagePath: imagePath)),
     );
+    return true;
   }
 
   UserItemRepository get _userItemRepository =>

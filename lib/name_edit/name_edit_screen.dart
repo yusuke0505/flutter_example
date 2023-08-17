@@ -42,7 +42,7 @@ class NameEditScreen extends HookConsumerWidget {
                 onTap: () {
                   showCircularProgressIndicatorDialog(context);
                   notifier.post().then((value) {
-                    Navigator.of(context).pop();
+                    GoRouter.of(context).pop();
                     if (value) {
                       GoRouter.of(context).pop();
                     } else {

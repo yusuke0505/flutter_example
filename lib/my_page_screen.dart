@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/dialogs.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:go_router/go_router.dart';
@@ -26,13 +27,23 @@ class MyPageScreen extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: GestureDetector(
-              onTap: () async {
-                final image =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-                if (image == null) {
-                  return;
-                }
-                await userNotifier.updateProfile(image);
+              onTap: () {
+                ImagePicker()
+                    .pickImage(source: ImageSource.gallery)
+                    .then((image) {
+                  if (image == null) {
+                    return;
+                  }
+                  showCircularProgressIndicatorDialog(context);
+                  userNotifier.updateProfile(image).then((value) {
+                    GoRouter.of(context).pop();
+                    if (!value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('更新に失敗しました')),
+                      );
+                    }
+                  });
+                });
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(imageSize / 2),
