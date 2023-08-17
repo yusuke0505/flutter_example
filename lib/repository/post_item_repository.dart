@@ -12,7 +12,8 @@ class PostItemRepository {
     try {
       final snapshot = await _instance.collection(_collectionPath).get();
       return snapshot.docs.map((e) => PostItem.fromFirestore(e, null)).toList();
-    } on Exception {
+    } catch (e) {
+      print('e: $e');
       return null;
     }
   }

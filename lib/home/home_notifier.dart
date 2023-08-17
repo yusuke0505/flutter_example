@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_example/data/post_item/post_item.dart';
 import 'package:flutter_example/data/user/user.dart';
+import 'package:flutter_example/repository/post_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,6 +25,10 @@ class HomeNotifier extends _$HomeNotifier {
   }
 
   Future<List<PostItem>> fetch() async {
+    final items = await _postItemRepository.fetchList();
+    if (items == null) {
+      //TODO エラー処理
+    }
     const imagePath =
         'https://www.barrel365.com/wp-content/uploads/2019/12/livet-1.jpg';
     await Future.delayed(const Duration(seconds: 1));
@@ -74,4 +79,7 @@ class HomeNotifier extends _$HomeNotifier {
       ),
     );
   }
+
+  PostItemRepository get _postItemRepository =>
+      ref.watch(postItemRepositoryProvider);
 }
