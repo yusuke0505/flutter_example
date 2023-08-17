@@ -8,6 +8,7 @@ class PostItem with _$PostItem {
   const factory PostItem({
     required String body,
     required String userId,
+    required String id,
   }) = _PostItem;
   const PostItem._();
 
@@ -19,6 +20,7 @@ class PostItem with _$PostItem {
     return PostItem(
       body: data?['body'],
       userId: data?['user_id'],
+      id: data?['id'],
     );
   }
 
@@ -26,6 +28,7 @@ class PostItem with _$PostItem {
     return {
       "body": body,
       "user_id": userId,
+      "id": id,
     };
   }
 }

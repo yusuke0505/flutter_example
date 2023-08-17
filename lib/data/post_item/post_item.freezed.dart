@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PostItem {
   String get body => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostItemCopyWith<PostItem> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $PostItemCopyWith<$Res> {
   factory $PostItemCopyWith(PostItem value, $Res Function(PostItem) then) =
       _$PostItemCopyWithImpl<$Res, PostItem>;
   @useResult
-  $Res call({String body, String userId});
+  $Res call({String body, String userId, String id});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$PostItemCopyWithImpl<$Res, $Val extends PostItem>
   $Res call({
     Object? body = null,
     Object? userId = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       body: null == body
@@ -56,6 +58,10 @@ class _$PostItemCopyWithImpl<$Res, $Val extends PostItem>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -68,7 +74,7 @@ abstract class _$$_PostItemCopyWith<$Res> implements $PostItemCopyWith<$Res> {
       __$$_PostItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String body, String userId});
+  $Res call({String body, String userId, String id});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_PostItemCopyWithImpl<$Res>
   $Res call({
     Object? body = null,
     Object? userId = null,
+    Object? id = null,
   }) {
     return _then(_$_PostItem(
       body: null == body
@@ -94,6 +101,10 @@ class __$$_PostItemCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -101,16 +112,20 @@ class __$$_PostItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PostItem extends _PostItem {
-  const _$_PostItem({required this.body, required this.userId}) : super._();
+  const _$_PostItem(
+      {required this.body, required this.userId, required this.id})
+      : super._();
 
   @override
   final String body;
   @override
   final String userId;
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'PostItem(body: $body, userId: $userId)';
+    return 'PostItem(body: $body, userId: $userId, id: $id)';
   }
 
   @override
@@ -119,11 +134,12 @@ class _$_PostItem extends _PostItem {
         (other.runtimeType == runtimeType &&
             other is _$_PostItem &&
             (identical(other.body, body) || other.body == body) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, body, userId);
+  int get hashCode => Object.hash(runtimeType, body, userId, id);
 
   @JsonKey(ignore: true)
   @override
@@ -134,13 +150,17 @@ class _$_PostItem extends _PostItem {
 
 abstract class _PostItem extends PostItem {
   const factory _PostItem(
-      {required final String body, required final String userId}) = _$_PostItem;
+      {required final String body,
+      required final String userId,
+      required final String id}) = _$_PostItem;
   const _PostItem._() : super._();
 
   @override
   String get body;
   @override
   String get userId;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$_PostItemCopyWith<_$_PostItem> get copyWith =>
