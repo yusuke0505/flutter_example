@@ -1,4 +1,5 @@
 import 'package:flutter_example/data/post_item/post_item.dart';
+import 'package:flutter_example/data/post_item_for_view/post_item_for_view.dart';
 import 'package:flutter_example/functions.dart';
 import 'package:flutter_example/home/home_notifier.dart';
 import 'package:flutter_example/repository/firestore/post_item_repository.dart';

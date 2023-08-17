@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_example/data/user/user.dart';
+import 'package:flutter_example/data/post_item_for_view/post_item_for_view.dart';
 import 'package:flutter_example/repository/firestore/post_item_repository.dart';
 import 'package:flutter_example/repository/firestore/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,16 +14,6 @@ class HomeState with _$HomeState {
   const factory HomeState({
     required List<PostItemForView> postItems,
   }) = _HomeState;
-}
-
-class PostItemForView {
-  const PostItemForView({
-    required this.body,
-    required this.userItem,
-  });
-
-  final String body;
-  final User userItem;
 }
 
 @riverpod

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/data/post_item_for_view/post_item_for_view.dart';
 import 'package:flutter_example/home/home_notifier.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
