@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_example/data/user/user.dart';
-import 'package:flutter_example/repository/post_item_repository.dart';
-import 'package:flutter_example/repository/user_item_repository.dart';
+import 'package:flutter_example/repository/firestore/post_item_repository.dart';
+import 'package:flutter_example/repository/firestore/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

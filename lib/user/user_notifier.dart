@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/firebase_auth_repository.dart';
 import 'package:flutter_example/repository/firebase_storage_repository.dart';
-import 'package:flutter_example/repository/user_item_repository.dart';
+import 'package:flutter_example/repository/firestore/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
