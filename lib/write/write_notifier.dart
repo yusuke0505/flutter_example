@@ -1,4 +1,6 @@
+import 'package:flutter_example/data/post_item/post_item.dart';
 import 'package:flutter_example/home/home_notifier.dart';
+import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,8 +26,13 @@ class WriteNotifier extends _$WriteNotifier {
   }
 
   Future<void> post() async {
-    _homeNotifier.post(state.text);
+    final item = PostItem(
+      body: state.text,
+      userItem: _userState.user!,
+    );
+    _homeNotifier.post(item);
   }
 
   HomeNotifier get _homeNotifier => ref.read(homeNotifierProvider.notifier);
+  UserState get _userState => ref.read(userNotifierProvider).value!;
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter_example/data/post_item/post_item.dart';
 import 'package:flutter_example/data/user/user.dart';
-import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -64,20 +63,15 @@ class HomeNotifier extends _$HomeNotifier {
     );
   }
 
-  Future<void> post(String body) async {
+  Future<void> post(PostItem item) async {
     final value = state.value!;
     state = AsyncValue.data(
       value.copyWith(
         postItems: [
-          PostItem(
-            body: body,
-            userItem: _userState.user!,
-          ),
+          item,
           ...value.postItems,
         ],
       ),
     );
   }
-
-  UserState get _userState => ref.read(userNotifierProvider).value!;
 }
