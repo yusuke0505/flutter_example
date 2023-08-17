@@ -15,7 +15,7 @@ class FavoriteRepository {
     try {
       final snapshot = (await _instance
               .collection(_collectionPath)
-              .where('user_id', isEqualTo: userId)
+              .where('from_user_id', isEqualTo: userId)
               .where(
                 'post_item_id',
                 isEqualTo: postItemId,
