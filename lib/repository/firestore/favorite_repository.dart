@@ -29,4 +29,13 @@ class FavoriteRepository {
       return false;
     }
   }
+
+  Future<bool> delete(Favorite favorite) async {
+    try {
+      await _instance.collection(_collectionPath).doc(favorite.id).delete();
+      return true;
+    } on Exception {
+      return false;
+    }
+  }
 }
