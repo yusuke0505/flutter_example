@@ -22,7 +22,7 @@ class FavoriteRepository {
     try {
       await _instance
           .collection(_collectionPath)
-          .doc()
+          .doc(favorite.id)
           .set(favorite.toFirestore());
       return true;
     } on Exception {
