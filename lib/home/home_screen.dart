@@ -69,7 +69,12 @@ class _Tile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(item.body),
-      trailing: _FavoriteButton(isFavorited: item.isFavorited),
+      trailing: _FavoriteButton(
+        isFavorited: item.isFavorited,
+        onTap: () {
+          return true;
+        },
+      ),
     );
   }
 }
@@ -77,9 +82,11 @@ class _Tile extends StatelessWidget {
 class _FavoriteButton extends HookWidget {
   const _FavoriteButton({
     required this.isFavorited,
+    required this.onTap,
   });
 
   final bool isFavorited;
+  final bool Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +94,17 @@ class _FavoriteButton extends HookWidget {
     return InkWell(
       onTap: () {
         isFavoritedNotifier.value = !isFavoritedNotifier.value;
+        final result = onTap();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+            result ? 'お気に入りしました' : 'お気に入りに失敗しました',
+          )),
+        );
+        if (!result) {
+          isFavoritedNotifier.value = !isFavoritedNotifier.value;
+          return;
+        }
       },
       child: Icon(
         Icons.favorite,
