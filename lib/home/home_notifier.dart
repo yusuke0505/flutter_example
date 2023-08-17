@@ -75,6 +75,17 @@ class HomeNotifier extends _$HomeNotifier {
   Future<bool> toggleFavorite(PostItemForView item) async {
     if (item.isFavorited) {
       // お気に入りを外す
+      final favorite = await _favoriteRepository.fetch(
+        userId: _userState.user!.uid,
+        postItemId: item.postItemId,
+      );
+      if (favorite == null) {
+        return false;
+      }
+      final result = await _favoriteRepository.delete(favorite);
+      if (!result) {
+        return false;
+      }
     } else {
       // お気に入りをする
       final result = await _favoriteRepository.create(
@@ -88,13 +99,13 @@ class HomeNotifier extends _$HomeNotifier {
         return false;
       }
     }
+    final value = state.value!;
+    final postItems = value.postItems
+        .map((e) =>
+            e == item ? item.copyWith(isFavorited: !item.isFavorited) : e)
+        .toList();
     state = AsyncValue.data(
-      state.value!.copyWith(
-        postItems: state.value!.postItems
-            .map((e) =>
-                e == item ? item.copyWith(isFavorited: !item.isFavorited) : e)
-            .toList(),
-      ),
+      value.copyWith(postItems: postItems),
     );
     return true;
   }
