@@ -8,6 +8,7 @@ class Favorite with _$Favorite {
   const factory Favorite({
     required String postItemId,
     required String fromUserId,
+    required String id,
   }) = _Favorite;
   const Favorite._();
 
@@ -19,6 +20,7 @@ class Favorite with _$Favorite {
     return Favorite(
       postItemId: data?['post_item_id'],
       fromUserId: data?['from_user_id'],
+      id: data?['id'],
     );
   }
 
@@ -26,6 +28,7 @@ class Favorite with _$Favorite {
     return {
       "post_item_id": postItemId,
       "from_user_id": fromUserId,
+      "id": id,
     };
   }
 }

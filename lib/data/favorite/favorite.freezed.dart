@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Favorite {
   String get postItemId => throw _privateConstructorUsedError;
   String get fromUserId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FavoriteCopyWith<Favorite> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $FavoriteCopyWith<$Res> {
   factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) then) =
       _$FavoriteCopyWithImpl<$Res, Favorite>;
   @useResult
-  $Res call({String postItemId, String fromUserId});
+  $Res call({String postItemId, String fromUserId, String id});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
   $Res call({
     Object? postItemId = null,
     Object? fromUserId = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
       postItemId: null == postItemId
@@ -56,6 +58,10 @@ class _$FavoriteCopyWithImpl<$Res, $Val extends Favorite>
       fromUserId: null == fromUserId
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -68,7 +74,7 @@ abstract class _$$_FavoriteCopyWith<$Res> implements $FavoriteCopyWith<$Res> {
       __$$_FavoriteCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String postItemId, String fromUserId});
+  $Res call({String postItemId, String fromUserId, String id});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_FavoriteCopyWithImpl<$Res>
   $Res call({
     Object? postItemId = null,
     Object? fromUserId = null,
+    Object? id = null,
   }) {
     return _then(_$_Favorite(
       postItemId: null == postItemId
@@ -94,6 +101,10 @@ class __$$_FavoriteCopyWithImpl<$Res>
           ? _value.fromUserId
           : fromUserId // ignore: cast_nullable_to_non_nullable
               as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -101,17 +112,20 @@ class __$$_FavoriteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Favorite extends _Favorite {
-  const _$_Favorite({required this.postItemId, required this.fromUserId})
+  const _$_Favorite(
+      {required this.postItemId, required this.fromUserId, required this.id})
       : super._();
 
   @override
   final String postItemId;
   @override
   final String fromUserId;
+  @override
+  final String id;
 
   @override
   String toString() {
-    return 'Favorite(postItemId: $postItemId, fromUserId: $fromUserId)';
+    return 'Favorite(postItemId: $postItemId, fromUserId: $fromUserId, id: $id)';
   }
 
   @override
@@ -122,11 +136,12 @@ class _$_Favorite extends _Favorite {
             (identical(other.postItemId, postItemId) ||
                 other.postItemId == postItemId) &&
             (identical(other.fromUserId, fromUserId) ||
-                other.fromUserId == fromUserId));
+                other.fromUserId == fromUserId) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, postItemId, fromUserId);
+  int get hashCode => Object.hash(runtimeType, postItemId, fromUserId, id);
 
   @JsonKey(ignore: true)
   @override
@@ -138,13 +153,16 @@ class _$_Favorite extends _Favorite {
 abstract class _Favorite extends Favorite {
   const factory _Favorite(
       {required final String postItemId,
-      required final String fromUserId}) = _$_Favorite;
+      required final String fromUserId,
+      required final String id}) = _$_Favorite;
   const _Favorite._() : super._();
 
   @override
   String get postItemId;
   @override
   String get fromUserId;
+  @override
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$_FavoriteCopyWith<_$_Favorite> get copyWith =>
