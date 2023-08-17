@@ -41,6 +41,7 @@ class HomeNotifier extends _$HomeNotifier {
       if (userItem != null) {
         list.add(
           PostItemForView(
+            postItemId: item.id,
             body: item.body,
             userItem: userItem,
           ),

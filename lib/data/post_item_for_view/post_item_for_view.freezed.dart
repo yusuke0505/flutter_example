@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PostItemForView {
+  String get postItemId => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   User get userItem => throw _privateConstructorUsedError;
   bool get isFavorited => throw _privateConstructorUsedError;
@@ -31,7 +32,7 @@ abstract class $PostItemForViewCopyWith<$Res> {
           PostItemForView value, $Res Function(PostItemForView) then) =
       _$PostItemForViewCopyWithImpl<$Res, PostItemForView>;
   @useResult
-  $Res call({String body, User userItem, bool isFavorited});
+  $Res call({String postItemId, String body, User userItem, bool isFavorited});
 
   $UserCopyWith<$Res> get userItem;
 }
@@ -49,11 +50,16 @@ class _$PostItemForViewCopyWithImpl<$Res, $Val extends PostItemForView>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? postItemId = null,
     Object? body = null,
     Object? userItem = null,
     Object? isFavorited = null,
   }) {
     return _then(_value.copyWith(
+      postItemId: null == postItemId
+          ? _value.postItemId
+          : postItemId // ignore: cast_nullable_to_non_nullable
+              as String,
       body: null == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -86,7 +92,7 @@ abstract class _$$_PostItemForViewCopyWith<$Res>
       __$$_PostItemForViewCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String body, User userItem, bool isFavorited});
+  $Res call({String postItemId, String body, User userItem, bool isFavorited});
 
   @override
   $UserCopyWith<$Res> get userItem;
@@ -103,11 +109,16 @@ class __$$_PostItemForViewCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? postItemId = null,
     Object? body = null,
     Object? userItem = null,
     Object? isFavorited = null,
   }) {
     return _then(_$_PostItemForView(
+      postItemId: null == postItemId
+          ? _value.postItemId
+          : postItemId // ignore: cast_nullable_to_non_nullable
+              as String,
       body: null == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
@@ -128,8 +139,13 @@ class __$$_PostItemForViewCopyWithImpl<$Res>
 
 class _$_PostItemForView implements _PostItemForView {
   const _$_PostItemForView(
-      {required this.body, required this.userItem, this.isFavorited = false});
+      {required this.postItemId,
+      required this.body,
+      required this.userItem,
+      this.isFavorited = false});
 
+  @override
+  final String postItemId;
   @override
   final String body;
   @override
@@ -140,7 +156,7 @@ class _$_PostItemForView implements _PostItemForView {
 
   @override
   String toString() {
-    return 'PostItemForView(body: $body, userItem: $userItem, isFavorited: $isFavorited)';
+    return 'PostItemForView(postItemId: $postItemId, body: $body, userItem: $userItem, isFavorited: $isFavorited)';
   }
 
   @override
@@ -148,6 +164,8 @@ class _$_PostItemForView implements _PostItemForView {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PostItemForView &&
+            (identical(other.postItemId, postItemId) ||
+                other.postItemId == postItemId) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.userItem, userItem) ||
                 other.userItem == userItem) &&
@@ -156,7 +174,8 @@ class _$_PostItemForView implements _PostItemForView {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, body, userItem, isFavorited);
+  int get hashCode =>
+      Object.hash(runtimeType, postItemId, body, userItem, isFavorited);
 
   @JsonKey(ignore: true)
   @override
@@ -167,10 +186,13 @@ class _$_PostItemForView implements _PostItemForView {
 
 abstract class _PostItemForView implements PostItemForView {
   const factory _PostItemForView(
-      {required final String body,
+      {required final String postItemId,
+      required final String body,
       required final User userItem,
       final bool isFavorited}) = _$_PostItemForView;
 
+  @override
+  String get postItemId;
   @override
   String get body;
   @override

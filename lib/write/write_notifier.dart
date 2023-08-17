@@ -29,10 +29,9 @@ class WriteNotifier extends _$WriteNotifier {
   }
 
   Future<bool> post() async {
-    final body = state.text;
     final user = _userState.user!;
     final item = PostItem(
-      body: body,
+      body: state.text,
       userId: user.uid,
       id: generateRandomString(),
     );
@@ -42,7 +41,8 @@ class WriteNotifier extends _$WriteNotifier {
     }
     _homeNotifier.post(
       PostItemForView(
-        body: body,
+        postItemId: item.id,
+        body: item.body,
         userItem: user,
       ),
     );

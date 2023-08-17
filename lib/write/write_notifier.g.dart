@@ -6,7 +6,7 @@ part of 'write_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$writeNotifierHash() => r'ff9a99d286c7ad2b838a5473cb1fa4653b6449f1';
+String _$writeNotifierHash() => r'3dc37e463ea313a9455ed9d529332201ed7015bc';
 
 /// See also [WriteNotifier].
 @ProviderFor(WriteNotifier)
