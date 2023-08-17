@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_example/data/post_item/post_item.dart';
 import 'package:flutter_example/data/user/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,12 +19,9 @@ class PostItemRepository {
     }
   }
 
-  Future<bool> create(User item) async {
+  Future<bool> create(PostItem item) async {
     try {
-      await _instance
-          .collection(_collectionPath)
-          .doc(item.uid)
-          .set(item.toFirestore());
+      await _instance.collection(_collectionPath).doc().set(item.toFirestore());
       return true;
     } on Exception {
       return false;
