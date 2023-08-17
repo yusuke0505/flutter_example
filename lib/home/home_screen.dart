@@ -108,15 +108,17 @@ class _FavoriteButton extends HookWidget {
       onTap: () {
         isFavoritedNotifier.value = !isFavoritedNotifier.value;
         final result = onTap();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-            result ? 'お気に入りしました' : 'お気に入りに失敗しました',
-          )),
-        );
         if (!result) {
           isFavoritedNotifier.value = !isFavoritedNotifier.value;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('処理に失敗しました')),
+          );
           return;
+        }
+        if (isFavoritedNotifier.value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('お気に入りしました')),
+          );
         }
       },
       child: Icon(
