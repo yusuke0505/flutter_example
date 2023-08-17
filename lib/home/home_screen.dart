@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/home/home_notifier.dart';
 import 'package:flutter_example/tab_item.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -72,14 +73,20 @@ class _Tile extends StatelessWidget {
   }
 }
 
-class _FavoriteButton extends StatelessWidget {
+class _FavoriteButton extends HookWidget {
   const _FavoriteButton();
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(
-      Icons.favorite,
-      color: Colors.grey,
+    final isLovedNotifier = useState<bool>(false);
+    return InkWell(
+      onTap: () {
+        isLovedNotifier.value = !isLovedNotifier.value;
+      },
+      child: Icon(
+        Icons.favorite,
+        color: isLovedNotifier.value ? Colors.pink : Colors.grey,
+      ),
     );
   }
 }
