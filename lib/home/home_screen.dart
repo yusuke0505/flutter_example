@@ -69,24 +69,28 @@ class _Tile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(item.body),
-      trailing: const _FavoriteButton(),
+      trailing: _FavoriteButton(isFavorited: item.isFavorited),
     );
   }
 }
 
 class _FavoriteButton extends HookWidget {
-  const _FavoriteButton();
+  const _FavoriteButton({
+    required this.isFavorited,
+  });
+
+  final bool isFavorited;
 
   @override
   Widget build(BuildContext context) {
-    final isLovedNotifier = useState<bool>(false);
+    final isFavoritedNotifier = useState<bool>(isFavorited);
     return InkWell(
       onTap: () {
-        isLovedNotifier.value = !isLovedNotifier.value;
+        isFavoritedNotifier.value = !isFavoritedNotifier.value;
       },
       child: Icon(
         Icons.favorite,
-        color: isLovedNotifier.value ? Colors.pink : Colors.grey,
+        color: isFavoritedNotifier.value ? Colors.pink : Colors.grey,
       ),
     );
   }

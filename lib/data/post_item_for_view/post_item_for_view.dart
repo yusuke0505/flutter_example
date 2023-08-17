@@ -8,6 +8,6 @@ class PostItemForView with _$PostItemForView {
   const factory PostItemForView({
     required String body,
     required User userItem,
-    @Default(false) bool isLoved,
+    @Default(false) bool isFavorited,
   }) = _PostItemForView;
 }

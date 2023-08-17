@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PostItemForView {
   String get body => throw _privateConstructorUsedError;
   User get userItem => throw _privateConstructorUsedError;
-  bool get isLoved => throw _privateConstructorUsedError;
+  bool get isFavorited => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostItemForViewCopyWith<PostItemForView> get copyWith =>
@@ -31,7 +31,7 @@ abstract class $PostItemForViewCopyWith<$Res> {
           PostItemForView value, $Res Function(PostItemForView) then) =
       _$PostItemForViewCopyWithImpl<$Res, PostItemForView>;
   @useResult
-  $Res call({String body, User userItem, bool isLoved});
+  $Res call({String body, User userItem, bool isFavorited});
 
   $UserCopyWith<$Res> get userItem;
 }
@@ -51,7 +51,7 @@ class _$PostItemForViewCopyWithImpl<$Res, $Val extends PostItemForView>
   $Res call({
     Object? body = null,
     Object? userItem = null,
-    Object? isLoved = null,
+    Object? isFavorited = null,
   }) {
     return _then(_value.copyWith(
       body: null == body
@@ -62,9 +62,9 @@ class _$PostItemForViewCopyWithImpl<$Res, $Val extends PostItemForView>
           ? _value.userItem
           : userItem // ignore: cast_nullable_to_non_nullable
               as User,
-      isLoved: null == isLoved
-          ? _value.isLoved
-          : isLoved // ignore: cast_nullable_to_non_nullable
+      isFavorited: null == isFavorited
+          ? _value.isFavorited
+          : isFavorited // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -86,7 +86,7 @@ abstract class _$$_PostItemForViewCopyWith<$Res>
       __$$_PostItemForViewCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String body, User userItem, bool isLoved});
+  $Res call({String body, User userItem, bool isFavorited});
 
   @override
   $UserCopyWith<$Res> get userItem;
@@ -105,7 +105,7 @@ class __$$_PostItemForViewCopyWithImpl<$Res>
   $Res call({
     Object? body = null,
     Object? userItem = null,
-    Object? isLoved = null,
+    Object? isFavorited = null,
   }) {
     return _then(_$_PostItemForView(
       body: null == body
@@ -116,9 +116,9 @@ class __$$_PostItemForViewCopyWithImpl<$Res>
           ? _value.userItem
           : userItem // ignore: cast_nullable_to_non_nullable
               as User,
-      isLoved: null == isLoved
-          ? _value.isLoved
-          : isLoved // ignore: cast_nullable_to_non_nullable
+      isFavorited: null == isFavorited
+          ? _value.isFavorited
+          : isFavorited // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -128,7 +128,7 @@ class __$$_PostItemForViewCopyWithImpl<$Res>
 
 class _$_PostItemForView implements _PostItemForView {
   const _$_PostItemForView(
-      {required this.body, required this.userItem, this.isLoved = false});
+      {required this.body, required this.userItem, this.isFavorited = false});
 
   @override
   final String body;
@@ -136,11 +136,11 @@ class _$_PostItemForView implements _PostItemForView {
   final User userItem;
   @override
   @JsonKey()
-  final bool isLoved;
+  final bool isFavorited;
 
   @override
   String toString() {
-    return 'PostItemForView(body: $body, userItem: $userItem, isLoved: $isLoved)';
+    return 'PostItemForView(body: $body, userItem: $userItem, isFavorited: $isFavorited)';
   }
 
   @override
@@ -151,11 +151,12 @@ class _$_PostItemForView implements _PostItemForView {
             (identical(other.body, body) || other.body == body) &&
             (identical(other.userItem, userItem) ||
                 other.userItem == userItem) &&
-            (identical(other.isLoved, isLoved) || other.isLoved == isLoved));
+            (identical(other.isFavorited, isFavorited) ||
+                other.isFavorited == isFavorited));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, body, userItem, isLoved);
+  int get hashCode => Object.hash(runtimeType, body, userItem, isFavorited);
 
   @JsonKey(ignore: true)
   @override
@@ -168,14 +169,14 @@ abstract class _PostItemForView implements PostItemForView {
   const factory _PostItemForView(
       {required final String body,
       required final User userItem,
-      final bool isLoved}) = _$_PostItemForView;
+      final bool isFavorited}) = _$_PostItemForView;
 
   @override
   String get body;
   @override
   User get userItem;
   @override
-  bool get isLoved;
+  bool get isFavorited;
   @override
   @JsonKey(ignore: true)
   _$$_PostItemForViewCopyWith<_$_PostItemForView> get copyWith =>
