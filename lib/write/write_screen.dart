@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/home/home_notifier.dart';
 import 'package:flutter_example/post_button.dart';
 import 'package:flutter_example/write/write_notifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,7 +12,6 @@ class WriteScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(writeNotifierProvider);
     final notifier = ref.watch(writeNotifierProvider.notifier);
-    final homeNotifier = ref.watch(homeNotifierProvider.notifier);
     final textEditingController = useTextEditingController();
     return GestureDetector(
       onTap: () {
@@ -48,7 +46,7 @@ class WriteScreen extends HookConsumerWidget {
                   label: '投稿',
                   enable: state.text.isNotEmpty,
                   onTap: () {
-                    homeNotifier.post(state.text);
+                    notifier.post();
                     GoRouter.of(context).pop();
                   },
                 ),

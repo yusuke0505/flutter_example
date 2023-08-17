@@ -1,3 +1,4 @@
+import 'package:flutter_example/home/home_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,4 +22,10 @@ class WriteNotifier extends _$WriteNotifier {
   void onTextChanged(String text) {
     state = state.copyWith(text: text.trim());
   }
+
+  Future<void> post() async {
+    _homeNotifier.post(state.text);
+  }
+
+  HomeNotifier get _homeNotifier => ref.read(homeNotifierProvider.notifier);
 }
