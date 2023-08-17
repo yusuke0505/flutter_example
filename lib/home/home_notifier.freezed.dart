@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
-  List<PostItem> get postItems => throw _privateConstructorUsedError;
+  List<PostItemForView> get postItems => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -28,7 +28,7 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({List<PostItem> postItems});
+  $Res call({List<PostItemForView> postItems});
 }
 
 /// @nodoc
@@ -50,7 +50,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       postItems: null == postItems
           ? _value.postItems
           : postItems // ignore: cast_nullable_to_non_nullable
-              as List<PostItem>,
+              as List<PostItemForView>,
     ) as $Val);
   }
 }
@@ -62,7 +62,7 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
       __$$_HomeStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<PostItem> postItems});
+  $Res call({List<PostItemForView> postItems});
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
       postItems: null == postItems
           ? _value._postItems
           : postItems // ignore: cast_nullable_to_non_nullable
-              as List<PostItem>,
+              as List<PostItemForView>,
     ));
   }
 }
@@ -90,12 +90,12 @@ class __$$_HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomeState implements _HomeState {
-  const _$_HomeState({required final List<PostItem> postItems})
+  const _$_HomeState({required final List<PostItemForView> postItems})
       : _postItems = postItems;
 
-  final List<PostItem> _postItems;
+  final List<PostItemForView> _postItems;
   @override
-  List<PostItem> get postItems {
+  List<PostItemForView> get postItems {
     if (_postItems is EqualUnmodifiableListView) return _postItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_postItems);
@@ -127,11 +127,11 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({required final List<PostItem> postItems}) =
+  const factory _HomeState({required final List<PostItemForView> postItems}) =
       _$_HomeState;
 
   @override
-  List<PostItem> get postItems;
+  List<PostItemForView> get postItems;
   @override
   @JsonKey(ignore: true)
   _$$_HomeStateCopyWith<_$_HomeState> get copyWith =>

@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_example/data/post_item/post_item.dart';
+import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/post_item_repository.dart';
+import 'package:flutter_example/repository/user_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,8 +12,18 @@ part 'home_notifier.g.dart';
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState({
-    required List<PostItem> postItems,
+    required List<PostItemForView> postItems,
   }) = _HomeState;
+}
+
+class PostItemForView {
+  const PostItemForView({
+    required this.body,
+    required this.userItem,
+  });
+
+  final String body;
+  final User userItem;
 }
 
 @riverpod
@@ -23,26 +34,26 @@ class HomeNotifier extends _$HomeNotifier {
     return HomeState(postItems: items);
   }
 
-  Future<List<PostItem>> fetch() async {
+  Future<List<PostItemForView>> fetch() async {
     final items = await _postItemRepository.fetchList();
     if (items == null) {
       //TODO エラー処理
+      return [];
     }
-    await Future.delayed(const Duration(seconds: 1));
-    return const [
-      PostItem(
-        body: 'body3',
-        userId: '',
-      ),
-      PostItem(
-        body: 'body2',
-        userId: '',
-      ),
-      PostItem(
-        body: 'body1',
-        userId: '',
-      ),
-    ];
+    final list = <PostItemForView>[];
+    for (var i = 0; i < items.length; i++) {
+      final item = items[i];
+      final userItem = await _userItemRepository.fetch(item.userId);
+      if (userItem != null) {
+        list.add(
+          PostItemForView(
+            body: item.body,
+            userItem: userItem,
+          ),
+        );
+      }
+    }
+    return list;
   }
 
   Future<void> refresh() async {
@@ -53,7 +64,7 @@ class HomeNotifier extends _$HomeNotifier {
     );
   }
 
-  Future<void> post(PostItem item) async {
+  Future<void> post(PostItemForView item) async {
     final value = state.value!;
     state = AsyncValue.data(
       value.copyWith(
@@ -67,4 +78,6 @@ class HomeNotifier extends _$HomeNotifier {
 
   PostItemRepository get _postItemRepository =>
       ref.watch(postItemRepositoryProvider);
+  UserItemRepository get _userItemRepository =>
+      ref.watch(userItemRepositoryProvider);
 }

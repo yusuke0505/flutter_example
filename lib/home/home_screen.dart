@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example/data/post_item/post_item.dart';
 import 'package:flutter_example/home/home_notifier.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:go_router/go_router.dart';
@@ -41,7 +40,7 @@ class HomeScreen extends HookConsumerWidget {
 class _Tile extends StatelessWidget {
   const _Tile({required this.item});
 
-  final PostItem item;
+  final PostItemForView item;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class _Tile extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(leadingSize / 2),
         child: Image.network(
-          '',
+          item.userItem.imagePath ?? '',
           width: leadingSize,
           height: leadingSize,
           errorBuilder: (_, __, ___) {
@@ -63,7 +62,7 @@ class _Tile extends StatelessWidget {
         ),
       ),
       title: Text(
-        '',
+        item.userItem.name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),

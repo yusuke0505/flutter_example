@@ -27,15 +27,22 @@ class WriteNotifier extends _$WriteNotifier {
   }
 
   Future<bool> post() async {
+    final body = state.text;
+    final user = _userState.user!;
     final item = PostItem(
-      body: state.text,
-      userId: _userState.user!.uid,
+      body: body,
+      userId: user.uid,
     );
     final result = await _postItemRepository.create(item);
     if (!result) {
       return false;
     }
-    _homeNotifier.post(item);
+    _homeNotifier.post(
+      PostItemForView(
+        body: body,
+        userItem: user,
+      ),
+    );
     return true;
   }
 
