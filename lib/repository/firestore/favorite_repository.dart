@@ -8,6 +8,27 @@ class FavoriteRepository {
   final _instance = FirebaseFirestore.instance;
   static const _collectionPath = 'favorites';
 
+  Future<Favorite?> fetch({
+    required String userId,
+    required String postItemId,
+  }) async {
+    try {
+      final snapshot = (await _instance
+              .collection(_collectionPath)
+              .where('user_id', isEqualTo: userId)
+              .where(
+                'post_item_id',
+                isEqualTo: postItemId,
+              )
+              .get())
+          .docs
+          .first;
+      return Favorite.fromFirestore(snapshot, null);
+    } on Exception {
+      return null;
+    }
+  }
+
   // TODO(you): 自分のお気に入りだけを取得する
   Future<List<Favorite>?> fetchList() async {
     try {
