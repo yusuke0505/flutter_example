@@ -67,6 +67,10 @@ class _Tile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(item.body),
+      trailing: const Icon(
+        Icons.favorite,
+        color: Colors.grey,
+      ),
     );
   }
 }
