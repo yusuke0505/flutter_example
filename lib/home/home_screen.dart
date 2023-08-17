@@ -28,7 +28,7 @@ class HomeScreen extends HookConsumerWidget {
         title: Text(TabItem.home.label),
       ),
       body: body,
-      floatingActionButton: _Button(
+      floatingActionButton: _AddButton(
         onTap: () {
           GoRouter.of(context).go('$homePath/$writePath');
         },
@@ -67,16 +67,25 @@ class _Tile extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(item.body),
-      trailing: const Icon(
-        Icons.favorite,
-        color: Colors.grey,
-      ),
+      trailing: const _FavoriteButton(),
     );
   }
 }
 
-class _Button extends StatelessWidget {
-  const _Button({
+class _FavoriteButton extends StatelessWidget {
+  const _FavoriteButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.favorite,
+      color: Colors.grey,
+    );
+  }
+}
+
+class _AddButton extends StatelessWidget {
+  const _AddButton({
     required this.onTap,
   });
 
