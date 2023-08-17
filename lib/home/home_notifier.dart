@@ -72,32 +72,31 @@ class HomeNotifier extends _$HomeNotifier {
   }
 
   // TODO(you): バックエンド作って永続化する
-  bool toggleFavorite(PostItemForView item) {
-    try {
-      if (item.isFavorited) {
-        // お気に入りを外す
-      } else {
-        // お気に入りをする
-        _favoriteRepository.create(
-          Favorite(
-            postItemId: item.postItemId,
-            fromUserId: _userState.user!.uid,
-            id: generateRandomString(),
-          ),
-        );
-      }
-      state = AsyncValue.data(
-        state.value!.copyWith(
-          postItems: state.value!.postItems
-              .map((e) =>
-                  e == item ? item.copyWith(isFavorited: !item.isFavorited) : e)
-              .toList(),
+  Future<bool> toggleFavorite(PostItemForView item) async {
+    if (item.isFavorited) {
+      // お気に入りを外す
+    } else {
+      // お気に入りをする
+      final result = await _favoriteRepository.create(
+        Favorite(
+          postItemId: item.postItemId,
+          fromUserId: _userState.user!.uid,
+          id: generateRandomString(),
         ),
       );
-      return true;
-    } on Exception {
-      return false;
+      if (!result) {
+        return false;
+      }
     }
+    state = AsyncValue.data(
+      state.value!.copyWith(
+        postItems: state.value!.postItems
+            .map((e) =>
+                e == item ? item.copyWith(isFavorited: !item.isFavorited) : e)
+            .toList(),
+      ),
+    );
+    return true;
   }
 
   PostItemRepository get _postItemRepository =>

@@ -53,7 +53,7 @@ class _Tile extends StatelessWidget {
   });
 
   final PostItemForView item;
-  final bool Function() toggleFavorite;
+  final Future<bool> Function() toggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class _FavoriteButton extends HookWidget {
   });
 
   final bool isFavorited;
-  final bool Function() onTap;
+  final Future<bool> Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -107,19 +107,20 @@ class _FavoriteButton extends HookWidget {
     return InkWell(
       onTap: () {
         isFavoritedNotifier.value = !isFavoritedNotifier.value;
-        final result = onTap();
-        if (!result) {
-          isFavoritedNotifier.value = !isFavoritedNotifier.value;
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('処理に失敗しました')),
-          );
-          return;
-        }
-        if (isFavoritedNotifier.value) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('お気に入りしました')),
-          );
-        }
+        onTap().then((value) {
+          if (!value) {
+            isFavoritedNotifier.value = !isFavoritedNotifier.value;
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('処理に失敗しました')),
+            );
+            return;
+          }
+          if (isFavoritedNotifier.value) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('お気に入りしました')),
+            );
+          }
+        });
       },
       child: Icon(
         Icons.favorite,
