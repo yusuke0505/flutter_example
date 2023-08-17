@@ -100,6 +100,10 @@ class _FavoriteButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isFavoritedNotifier = useState<bool>(isFavorited);
+    useEffect(() {
+      isFavoritedNotifier.value = isFavorited;
+      return null;
+    }, [isFavorited]);
     return InkWell(
       onTap: () {
         isFavoritedNotifier.value = !isFavoritedNotifier.value;
