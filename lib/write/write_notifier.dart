@@ -34,7 +34,7 @@ class WriteNotifier extends _$WriteNotifier {
     final item = PostItem(
       body: body,
       userId: user.uid,
-      id: generateRandomString(20),
+      id: generateRandomString(),
     );
     final result = await _postItemRepository.create(item);
     if (!result) {

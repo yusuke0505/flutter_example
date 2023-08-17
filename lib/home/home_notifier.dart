@@ -6,6 +6,7 @@ import 'package:flutter_example/functions.dart';
 import 'package:flutter_example/repository/firestore/favorite_repository.dart';
 import 'package:flutter_example/repository/firestore/post_item_repository.dart';
 import 'package:flutter_example/repository/firestore/user_item_repository.dart';
+import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -78,8 +79,8 @@ class HomeNotifier extends _$HomeNotifier {
       _favoriteRepository.create(
         Favorite(
           postItemId: 'postItemId',
-          fromUserId: 'fromUserId',
-          id: generateRandomString(20),
+          fromUserId: _userState.user!.uid,
+          id: generateRandomString(),
         ),
       );
     }
@@ -100,4 +101,5 @@ class HomeNotifier extends _$HomeNotifier {
       ref.watch(userItemRepositoryProvider);
   FavoriteRepository get _favoriteRepository =>
       ref.watch(favoriteRepositoryProvider);
+  UserState get _userState => ref.read(userNotifierProvider).value!;
 }
