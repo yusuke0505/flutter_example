@@ -30,6 +30,7 @@ class WriteNotifier extends _$WriteNotifier {
     final item = PostItem(
       body: state.text,
       userItem: _userState.user!,
+      userId: _userState.user!.uid,
     );
     final result = await _postItemRepository.create(item);
     if (!result) {

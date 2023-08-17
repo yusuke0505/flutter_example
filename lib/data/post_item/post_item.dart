@@ -9,6 +9,7 @@ class PostItem with _$PostItem {
   const factory PostItem({
     required String body,
     required User userItem,
+    required String userId,
   }) = _PostItem;
   const PostItem._();
 
@@ -20,6 +21,7 @@ class PostItem with _$PostItem {
     return PostItem(
       body: data?['body'],
       userItem: data?['user_item'],
+      userId: data?['user_id'],
     );
   }
 
@@ -27,6 +29,7 @@ class PostItem with _$PostItem {
     return {
       "body": body,
       "user_item": userItem.toFirestore(),
+      "user_id": userId,
     };
   }
 }

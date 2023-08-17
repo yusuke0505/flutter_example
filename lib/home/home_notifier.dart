@@ -40,6 +40,7 @@ class HomeNotifier extends _$HomeNotifier {
           name: 'name3',
           imagePath: imagePath,
         ),
+        userId: '',
       ),
       PostItem(
         body: 'body2',
@@ -48,6 +49,7 @@ class HomeNotifier extends _$HomeNotifier {
           name: 'name2',
           imagePath: imagePath,
         ),
+        userId: '',
       ),
       PostItem(
         body: 'body1',
@@ -56,6 +58,7 @@ class HomeNotifier extends _$HomeNotifier {
           name: 'name1',
           imagePath: imagePath,
         ),
+        userId: '',
       ),
     ];
   }
