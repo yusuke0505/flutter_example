@@ -6,7 +6,7 @@ part of 'name_edit_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nameEditNotifierHash() => r'04c9176d8efca4e962575a08b3050b5dd5cb64f8';
+String _$nameEditNotifierHash() => r'7d4c4eddb6800e13baefc9535651e07af5178f98';
 
 /// See also [NameEditNotifier].
 @ProviderFor(NameEditNotifier)
