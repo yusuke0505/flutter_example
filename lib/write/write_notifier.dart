@@ -29,7 +29,6 @@ class WriteNotifier extends _$WriteNotifier {
   Future<bool> post() async {
     final item = PostItem(
       body: state.text,
-      userItem: _userState.user!,
       userId: _userState.user!.uid,
     );
     final result = await _postItemRepository.create(item);

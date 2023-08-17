@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PostItem {
   String get body => throw _privateConstructorUsedError;
-  User get userItem => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,9 +29,7 @@ abstract class $PostItemCopyWith<$Res> {
   factory $PostItemCopyWith(PostItem value, $Res Function(PostItem) then) =
       _$PostItemCopyWithImpl<$Res, PostItem>;
   @useResult
-  $Res call({String body, User userItem, String userId});
-
-  $UserCopyWith<$Res> get userItem;
+  $Res call({String body, String userId});
 }
 
 /// @nodoc
@@ -49,7 +46,6 @@ class _$PostItemCopyWithImpl<$Res, $Val extends PostItem>
   @override
   $Res call({
     Object? body = null,
-    Object? userItem = null,
     Object? userId = null,
   }) {
     return _then(_value.copyWith(
@@ -57,23 +53,11 @@ class _$PostItemCopyWithImpl<$Res, $Val extends PostItem>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
-      userItem: null == userItem
-          ? _value.userItem
-          : userItem // ignore: cast_nullable_to_non_nullable
-              as User,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get userItem {
-    return $UserCopyWith<$Res>(_value.userItem, (value) {
-      return _then(_value.copyWith(userItem: value) as $Val);
-    });
   }
 }
 
@@ -84,10 +68,7 @@ abstract class _$$_PostItemCopyWith<$Res> implements $PostItemCopyWith<$Res> {
       __$$_PostItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String body, User userItem, String userId});
-
-  @override
-  $UserCopyWith<$Res> get userItem;
+  $Res call({String body, String userId});
 }
 
 /// @nodoc
@@ -102,7 +83,6 @@ class __$$_PostItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object? body = null,
-    Object? userItem = null,
     Object? userId = null,
   }) {
     return _then(_$_PostItem(
@@ -110,10 +90,6 @@ class __$$_PostItemCopyWithImpl<$Res>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
-      userItem: null == userItem
-          ? _value.userItem
-          : userItem // ignore: cast_nullable_to_non_nullable
-              as User,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -125,20 +101,16 @@ class __$$_PostItemCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PostItem extends _PostItem {
-  const _$_PostItem(
-      {required this.body, required this.userItem, required this.userId})
-      : super._();
+  const _$_PostItem({required this.body, required this.userId}) : super._();
 
   @override
   final String body;
-  @override
-  final User userItem;
   @override
   final String userId;
 
   @override
   String toString() {
-    return 'PostItem(body: $body, userItem: $userItem, userId: $userId)';
+    return 'PostItem(body: $body, userId: $userId)';
   }
 
   @override
@@ -147,13 +119,11 @@ class _$_PostItem extends _PostItem {
         (other.runtimeType == runtimeType &&
             other is _$_PostItem &&
             (identical(other.body, body) || other.body == body) &&
-            (identical(other.userItem, userItem) ||
-                other.userItem == userItem) &&
             (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, body, userItem, userId);
+  int get hashCode => Object.hash(runtimeType, body, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -164,15 +134,11 @@ class _$_PostItem extends _PostItem {
 
 abstract class _PostItem extends PostItem {
   const factory _PostItem(
-      {required final String body,
-      required final User userItem,
-      required final String userId}) = _$_PostItem;
+      {required final String body, required final String userId}) = _$_PostItem;
   const _PostItem._() : super._();
 
   @override
   String get body;
-  @override
-  User get userItem;
   @override
   String get userId;
   @override

@@ -8,7 +8,6 @@ part 'post_item.freezed.dart';
 class PostItem with _$PostItem {
   const factory PostItem({
     required String body,
-    required User userItem,
     required String userId,
   }) = _PostItem;
   const PostItem._();
@@ -20,7 +19,6 @@ class PostItem with _$PostItem {
     final data = snapshot.data();
     return PostItem(
       body: data?['body'],
-      userItem: data?['user_item'],
       userId: data?['user_id'],
     );
   }
@@ -28,7 +26,6 @@ class PostItem with _$PostItem {
   Map<String, dynamic> toFirestore() {
     return {
       "body": body,
-      "user_item": userItem.toFirestore(),
       "user_id": userId,
     };
   }

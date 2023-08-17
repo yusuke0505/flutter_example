@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_example/data/post_item/post_item.dart';
-import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/repository/post_item_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -29,35 +28,18 @@ class HomeNotifier extends _$HomeNotifier {
     if (items == null) {
       //TODO エラー処理
     }
-    const imagePath =
-        'https://www.barrel365.com/wp-content/uploads/2019/12/livet-1.jpg';
     await Future.delayed(const Duration(seconds: 1));
     return const [
       PostItem(
         body: 'body3',
-        userItem: User(
-          uid: '',
-          name: 'name3',
-          imagePath: imagePath,
-        ),
         userId: '',
       ),
       PostItem(
         body: 'body2',
-        userItem: User(
-          uid: '',
-          name: 'name2',
-          imagePath: imagePath,
-        ),
         userId: '',
       ),
       PostItem(
         body: 'body1',
-        userItem: User(
-          uid: '',
-          name: 'name1',
-          imagePath: imagePath,
-        ),
         userId: '',
       ),
     ];
