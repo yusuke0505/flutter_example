@@ -14,8 +14,8 @@ import 'my_root_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
-final GlobalKey<NavigatorState> _sectionANavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'sectionANav');
+final GlobalKey<NavigatorState> _sectionNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'sectionNav');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +53,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
         },
         branches: <StatefulShellBranch>[
           StatefulShellBranch(
-            navigatorKey: _sectionANavigatorKey,
+            navigatorKey: _sectionNavigatorKey,
             routes: <RouteBase>[
               GoRoute(
                 path: homePath,
