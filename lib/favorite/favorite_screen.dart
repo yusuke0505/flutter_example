@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/tab_item.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({
-    super.key,
-    required this.label,
-  });
-
-  final String label;
+  const FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final label = TabItem.favorite.label;
     return Scaffold(
       appBar: AppBar(
         title: Text(label),

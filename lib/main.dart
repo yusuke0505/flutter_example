@@ -71,8 +71,7 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
             routes: <RouteBase>[
               GoRoute(
                 path: favoritePath,
-                builder: (_, __) =>
-                    FavoriteScreen(label: TabItem.favorite.label),
+                builder: (_, __) => const FavoriteScreen(),
               ),
             ],
           ),
