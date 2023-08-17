@@ -66,6 +66,7 @@ class HomeNotifier extends _$HomeNotifier {
     );
   }
 
+  // TODO(you): バックエンド作って永続化する
   bool toggleFavorite(PostItemForView item) {
     state = AsyncValue.data(
       state.value!.copyWith(
