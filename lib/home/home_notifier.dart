@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_example/data/post_item/post_item.dart';
 import 'package:flutter_example/data/user/user.dart';
 import 'package:flutter_example/user/user_notifier.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,16 +14,6 @@ class HomeState with _$HomeState {
   const factory HomeState({
     required List<PostItem> postItems,
   }) = _HomeState;
-}
-
-class PostItem {
-  const PostItem({
-    required this.body,
-    required this.userItem,
-  });
-
-  final String body;
-  final User userItem;
 }
 
 @riverpod
