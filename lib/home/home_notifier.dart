@@ -79,7 +79,7 @@ class HomeNotifier extends _$HomeNotifier {
       // お気に入りをする
       _favoriteRepository.create(
         Favorite(
-          postItemId: 'postItemId',
+          postItemId: item.postItemId,
           fromUserId: _userState.user!.uid,
           id: generateRandomString(),
         ),
