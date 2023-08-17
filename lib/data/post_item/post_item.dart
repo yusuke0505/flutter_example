@@ -26,7 +26,7 @@ class PostItem with _$PostItem {
   Map<String, dynamic> toFirestore() {
     return {
       "body": body,
-      "user_item": userItem,
+      "user_item": userItem.toFirestore(),
     };
   }
 }

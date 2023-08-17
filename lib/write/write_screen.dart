@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/dialogs.dart';
 import 'package:flutter_example/post_button.dart';
 import 'package:flutter_example/write/write_notifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -46,8 +47,17 @@ class WriteScreen extends HookConsumerWidget {
                   label: '投稿',
                   enable: state.text.isNotEmpty,
                   onTap: () {
-                    notifier.post();
-                    GoRouter.of(context).pop();
+                    showCircularProgressIndicatorDialog(context);
+                    notifier.post().then((value) {
+                      GoRouter.of(context).pop();
+                      if (!value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('投稿に失敗しました')),
+                        );
+                        return;
+                      }
+                      GoRouter.of(context).pop();
+                    });
                   },
                 ),
               ),
