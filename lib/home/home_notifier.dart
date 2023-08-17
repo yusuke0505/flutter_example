@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter_example/data/favorite/favorite.dart';
 import 'package:flutter_example/data/post_item_for_view/post_item_for_view.dart';
+import 'package:flutter_example/functions.dart';
 import 'package:flutter_example/repository/firestore/favorite_repository.dart';
 import 'package:flutter_example/repository/firestore/post_item_repository.dart';
 import 'package:flutter_example/repository/firestore/user_item_repository.dart';
@@ -69,6 +71,18 @@ class HomeNotifier extends _$HomeNotifier {
 
   // TODO(you): バックエンド作って永続化する
   bool toggleFavorite(PostItemForView item) {
+    if (item.isFavorited) {
+      // お気に入りを外す
+    } else {
+      // お気に入りをする
+      _favoriteRepository.create(
+        Favorite(
+          postItemId: 'postItemId',
+          fromUserId: 'fromUserId',
+          id: generateRandomString(20),
+        ),
+      );
+    }
     state = AsyncValue.data(
       state.value!.copyWith(
         postItems: state.value!.postItems
