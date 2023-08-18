@@ -7,6 +7,8 @@ final favoriteRepositoryProvider = Provider((_) => FavoriteRepository());
 class FavoriteRepository {
   final _instance = FirebaseFirestore.instance;
   static const _collectionPath = 'favorites';
+  static const _postItemIdField = 'post_item_id';
+  static const _fromUserId = 'from_user_id';
 
   Future<Favorite?> fetch({
     required String userId,
@@ -15,9 +17,9 @@ class FavoriteRepository {
     try {
       final snapshot = (await _instance
               .collection(_collectionPath)
-              .where('from_user_id', isEqualTo: userId)
+              .where(_fromUserId, isEqualTo: userId)
               .where(
-                'post_item_id',
+                _postItemIdField,
                 isEqualTo: postItemId,
               )
               .get())
@@ -29,10 +31,12 @@ class FavoriteRepository {
     }
   }
 
-  // TODO(you): 自分のお気に入りだけを取得する
-  Future<List<Favorite>?> fetchList() async {
+  Future<List<Favorite>?> fetchList(String userId) async {
     try {
-      final snapshot = await _instance.collection(_collectionPath).get();
+      final snapshot = await _instance
+          .collection(_collectionPath)
+          .where(_postItemIdField, isEqualTo: userId)
+          .get();
       return snapshot.docs.map((e) => Favorite.fromFirestore(e, null)).toList();
     } on Exception {
       return null;
