@@ -12,22 +12,25 @@ class Favorite with _$Favorite {
   }) = _Favorite;
   const Favorite._();
 
+  static const postItemIdFieldName = 'post_item_id';
+  static const fromUserIdFieldName = 'from_user_id';
+
   factory Favorite.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
     return Favorite(
-      postItemId: data?['post_item_id'],
-      fromUserId: data?['from_user_id'],
+      postItemId: data?[postItemIdFieldName],
+      fromUserId: data?[fromUserIdFieldName],
       id: data?['id'],
     );
   }
 
   Map<String, dynamic> toFirestore() {
     return {
-      "post_item_id": postItemId,
-      "from_user_id": fromUserId,
+      postItemIdFieldName: postItemId,
+      fromUserIdFieldName: fromUserId,
       "id": id,
     };
   }
