@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example/data/post_item_for_view/post_item_for_view.dart';
+import 'package:flutter_example/dialogs.dart';
 import 'package:flutter_example/home/home_notifier.dart';
 import 'package:flutter_example/tab_item.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -106,10 +107,11 @@ class _FavoriteButton extends HookWidget {
     }, [isFavorited]);
     return InkWell(
       onTap: () {
-        isFavoritedNotifier.value = !isFavoritedNotifier.value;
+        showCircularProgressIndicatorDialog(context);
         onTap().then((value) {
+          GoRouter.of(context).pop();
+          isFavoritedNotifier.value = !isFavoritedNotifier.value;
           if (!value) {
-            isFavoritedNotifier.value = !isFavoritedNotifier.value;
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('処理に失敗しました')),
             );
